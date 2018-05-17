@@ -7,15 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A0768A120AE45FC003DBCE4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */; };
+		9A393E6920AE347700685EC1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6820AE347700685EC1 /* WebKit.framework */; };
+		9A393E6B20AE348500685EC1 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6A20AE348500685EC1 /* libxml2.2.tbd */; };
+		9AAE76B620AE47400052B2AB /* AerServSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE76B520AE47400052B2AB /* AerServSDK.framework */; };
+		9AAE76B720AE47F50052B2AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AEB795320AE2D54004C9D5F /* LaunchScreen.storyboard */; };
 		9AEB794920AE2D52004C9D5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEB794820AE2D52004C9D5F /* AppDelegate.swift */; };
 		9AEB794B20AE2D52004C9D5F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEB794A20AE2D52004C9D5F /* FirstViewController.swift */; };
 		9AEB794D20AE2D52004C9D5F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEB794C20AE2D52004C9D5F /* SecondViewController.swift */; };
 		9AEB795020AE2D52004C9D5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AEB794E20AE2D52004C9D5F /* Main.storyboard */; };
 		9AEB795220AE2D54004C9D5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AEB795120AE2D54004C9D5F /* Assets.xcassets */; };
-		9AEB795520AE2D54004C9D5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AEB795320AE2D54004C9D5F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		9A393E6820AE347700685EC1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		9A393E6A20AE348500685EC1 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		9A393E7020AE430200685EC1 /* AerServSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AerServSDK-Bridging-Header.h"; path = "OCGEN/AerServSDK-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		9AAE76B520AE47400052B2AB /* AerServSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AerServSDK.framework; path = OCGEN/AerServSDK.framework; sourceTree = "<group>"; };
 		9AEB794520AE2D52004C9D5F /* OCGEN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCGEN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AEB794820AE2D52004C9D5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AEB794A20AE2D52004C9D5F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -31,17 +40,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AAE76B620AE47400052B2AB /* AerServSDK.framework in Frameworks */,
+				9A393E6B20AE348500685EC1 /* libxml2.2.tbd in Frameworks */,
+				9A393E6920AE347700685EC1 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A393E6520AE346D00685EC1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9AAE76B520AE47400052B2AB /* AerServSDK.framework */,
+				9A393E6A20AE348500685EC1 /* libxml2.2.tbd */,
+				9A393E6820AE347700685EC1 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9AEB793C20AE2D52004C9D5F = {
 			isa = PBXGroup;
 			children = (
+				9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */,
 				9AEB794720AE2D52004C9D5F /* OCGEN */,
 				9AEB794620AE2D52004C9D5F /* Products */,
+				9A393E6520AE346D00685EC1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +87,7 @@
 				9AEB795120AE2D54004C9D5F /* Assets.xcassets */,
 				9AEB795320AE2D54004C9D5F /* LaunchScreen.storyboard */,
 				9AEB795620AE2D54004C9D5F /* Info.plist */,
+				9A393E7020AE430200685EC1 /* AerServSDK-Bridging-Header.h */,
 			);
 			path = OCGEN;
 			sourceTree = "<group>";
@@ -125,7 +150,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AEB795520AE2D54004C9D5F /* LaunchScreen.storyboard in Resources */,
+				9A0768A120AE45FC003DBCE4 /* Default-568h@2x.png in Resources */,
+				9AAE76B720AE47F50052B2AB /* LaunchScreen.storyboard in Resources */,
 				9AEB795220AE2D54004C9D5F /* Assets.xcassets in Resources */,
 				9AEB795020AE2D52004C9D5F /* Main.storyboard in Resources */,
 			);
@@ -286,13 +312,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L36D2F8J6M;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/OCGEN";
 				INFOPLIST_FILE = OCGEN/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aerserv.OCGEN;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OCGEN",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vartyr.ocgen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OCGEN/AerServSDK-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -304,13 +338,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L36D2F8J6M;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/OCGEN";
 				INFOPLIST_FILE = OCGEN/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aerserv.OCGEN;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OCGEN",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vartyr.ocgen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OCGEN/AerServSDK-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
