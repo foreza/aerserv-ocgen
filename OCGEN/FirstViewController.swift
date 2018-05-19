@@ -12,8 +12,6 @@ import AerServSDK
 
 class FirstViewController: UIViewController, ASInterstitialViewControllerDelegate, ASAdViewDelegate {
 
-    
-
     // State Control and other vars
     var isReady = false
     var bannerPlacementID = "380000"
@@ -24,8 +22,16 @@ class FirstViewController: UIViewController, ASInterstitialViewControllerDelegat
     
     // Declare my view variables here
     
+    @IBOutlet weak var appTitle: UILabel!
+    @IBOutlet weak var version: UILabel!
+    @IBOutlet weak var gdpr: UILabel!
     
     
+    @IBOutlet weak var generateOCButton: UIButton!
+    @IBOutlet weak var resultOCText: UILabel!
+    
+    
+
     
     // On View load, do the following
     /*
@@ -35,7 +41,10 @@ class FirstViewController: UIViewController, ASInterstitialViewControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-   
+        // Set the UI text elements for this view.
+        version?.text = String("SDK Version: " + AerServSDK.sdkVersion())
+        gdpr?.text = String("GDPR Consent: " + String(AerServSDK.getGDPRConsentValue()))
+
 
         
         load_banner();
@@ -107,6 +116,17 @@ class FirstViewController: UIViewController, ASInterstitialViewControllerDelegat
         return self
     }
     
+    
+    
+    // FUNCTION TO DO SOMETHING TO GENERATE OC
+    @IBAction func generateOC(_ sender: Any) {
+        print ("[DEBUG] generating OC..")
+            self.resultOCText.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+    }
+    
+
+    
+    // CALL BACK METHODS
     
     //MARK: ASInterstitialViewController Delegate callback
     func interstitialViewControllerDidPreloadAd(_ viewController: ASInterstitialViewController!) {
