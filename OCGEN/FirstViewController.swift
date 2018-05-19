@@ -10,7 +10,7 @@ import UIKit
 import AerServSDK
 
 
-class FirstViewController: UIViewController, ASInterstitialViewControllerDelegate, ASAdViewDelegate {
+class FirstViewController: UIViewController, ASAdViewDelegate {
 
     // State Control and other vars
     var isReady = false
@@ -29,7 +29,7 @@ class FirstViewController: UIViewController, ASInterstitialViewControllerDelegat
     
     @IBOutlet weak var generateOCButton: UIButton!
     @IBOutlet weak var resultOCText: UILabel!
-    
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
 
     
@@ -122,66 +122,14 @@ class FirstViewController: UIViewController, ASInterstitialViewControllerDelegat
     @IBAction func generateOC(_ sender: Any) {
         print ("[DEBUG] generating OC..")
             self.resultOCText.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+        self.spinner.stopAnimating()
+        
+        
     }
     
 
     
-    // CALL BACK METHODS
-    
-    //MARK: ASInterstitialViewController Delegate callback
-    func interstitialViewControllerDidPreloadAd(_ viewController: ASInterstitialViewController!) {
-        print("@--- Interstitial ad preload ready ---@");
-        isReady = true;
-    }
-    
-    func interstitialViewControllerAdLoadedSuccessfully(_ viewController: ASInterstitialViewController!) {
-        print("@--- Interstitial ad loaded ---@")
-    }
-    
-    func interstitialViewController(_ viewController: ASInterstitialViewController!, didShowAdWithTransactionInfo transcationData: [AnyHashable : Any]!) {
-        print("@--- Interstitial ad has transaction info: buyerName = ", transcationData["buyerName"] ?? "nil", ", buyerPrice = ",  transcationData["buyerPrice"] ?? "nil", " ---@")
-    }
-    
-    func interstitialViewControllerDidVirtualCurrencyLoad(_ viewController: ASInterstitialViewController!, vcData: [AnyHashable : Any]!) {
-        print("@--- Interstitial ad with virtual currency rewarded: name =", vcData["name"] ?? "nil", ", rewardAmount =", vcData["rewardAmount"] ?? "nil", ", buyerName =", vcData["buyerName"] ?? "nil", ", buyerPrice =",  vcData["buyerPrice"] ?? "nil", " ---@")
-    }
-    
-    func interstitialViewControllerWillAppear(_ viewController: ASInterstitialViewController!) {
-        print("@--- Interstitial ad will appear ---@")
-    }
-    
-    func interstitialViewControllerDidAppear(_ viewController: ASInterstitialViewController!) {
-        print("@--- Interstitial ad did appear ---@")
-    }
-    
-    func interstitialViewControllerAdWasTouched(_ viewController: ASInterstitialViewController!) {
-        print("@--- Interstitial ad was clicked ---@")
-    }
-    
-    func interstitialViewControllerAdInteraction(_ viewController: ASInterstitialViewController!) {
-        print("@--- Interstitial ad has interaction ---@")
-    }
-    
-    func interstitialViewControllerAdFailed(toLoad viewController: ASInterstitialViewController!, withError error: Error!) {
-        print("@--- Interstitial ad failed: ", error, " ---@")
-    }
-    
-    func interstitialViewControllerAdDidComplete(_ viewController: ASInterstitialViewController!) {
-        print("@--- Interstitial ad was completed ---@")
-    }
-    
-    func interstitialViewControllerDidVirtualCurrencyReward(_ viewController: ASInterstitialViewController!, vcData: [AnyHashable : Any]!) {
-        print("@--- Interstitial ad did reward virtual curreny: name =", vcData["name"] ?? "nil", ", rewardAmount =", vcData["rewardAmount"] ?? "nil", "buyerName =", vcData["buyerName"] ?? "nil", ", buyerPrice =",  vcData["buyerPrice"] ?? "nil", " ---@")
-    }
-    
-    func interstitialViewControllerWillDisappear(_ viewController: ASInterstitialViewController!) {
-        print("@--- Interstitial ad will disappear ---@")
-    }
-    
-    func interstitialViewControllerDidDisappear(_ viewController: ASInterstitialViewController!) {
-        print("@--- Interstitial ad did disappear ---@")
-    }
-    
+ 
     func adViewDidPreloadAd(_ adView: ASAdView!) {
         isReady = true
         print("@--- Banner ad is preloaded ---@")

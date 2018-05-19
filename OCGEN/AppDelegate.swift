@@ -9,6 +9,10 @@
 import UIKit
 
 @UIApplicationMain
+
+
+
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -17,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {        
         
         // Perform Init for AerServ SDK
-        AerServSDK.initialize(withAppID: "3800007")
+        AerServSDK.initialize(withAppID: "380000")
         
         // Show log
         AerServSDK.showLogs(true)
@@ -46,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+        
+    }
 
-}
 
