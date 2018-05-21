@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		92DAD49D20B37C1A00E2678B /* VC-Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DAD49C20B37C1A00E2678B /* VC-Singleton.swift */; };
 		9A0768A120AE45FC003DBCE4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */; };
 		9A393E6920AE347700685EC1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6820AE347700685EC1 /* WebKit.framework */; };
 		9A393E6B20AE348500685EC1 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6A20AE348500685EC1 /* libxml2.2.tbd */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		92DAD49C20B37C1A00E2678B /* VC-Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC-Singleton.swift"; sourceTree = "<group>"; };
 		9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9A393E6820AE347700685EC1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9A393E6A20AE348500685EC1 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				9AEB794820AE2D52004C9D5F /* AppDelegate.swift */,
+				92DAD49C20B37C1A00E2678B /* VC-Singleton.swift */,
 				9AEB794A20AE2D52004C9D5F /* FirstViewController.swift */,
 				9AEB794C20AE2D52004C9D5F /* SecondViewController.swift */,
 				9AEB794E20AE2D52004C9D5F /* Main.storyboard */,
@@ -166,6 +169,7 @@
 			files = (
 				9AEB794D20AE2D52004C9D5F /* SecondViewController.swift in Sources */,
 				9AEB794920AE2D52004C9D5F /* AppDelegate.swift in Sources */,
+				92DAD49D20B37C1A00E2678B /* VC-Singleton.swift in Sources */,
 				9AEB794B20AE2D52004C9D5F /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

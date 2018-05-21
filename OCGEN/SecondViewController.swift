@@ -9,7 +9,11 @@
 import UIKit
 import AerServSDK
 
+
+
 class SecondViewController: UIViewController, ASInterstitialViewControllerDelegate {
+
+    var vc = VCInstance.sharedInstance
     
     // State Control and other vars
     var isReady = false
@@ -17,13 +21,23 @@ class SecondViewController: UIViewController, ASInterstitialViewControllerDelega
     
     // Banner and interstitial objects
     var interstitial: ASInterstitialViewController?
-
     
     // Declare my view variables here
-
+    @IBOutlet weak var earnEnergyVC: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        earnEnergyVC?.text = String(vc.getAmount()) + " " +  vc.getCurrencyName();
+
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        earnEnergyVC?.text = String(vc.getAmount()) + " " +  vc.getCurrencyName();
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,9 +46,7 @@ class SecondViewController: UIViewController, ASInterstitialViewControllerDelega
     }
     
     // Load Interstitial
-    @IBAction func load_intserstitial(_ sender: Any) {
-        
-
+    @IBAction func load_interstitial(_ sender: Any) {
         
         interstitial = ASInterstitialViewController(forPlacementID: interstitialPlacementID, with:self)
         interstitial?.keyWords = ["Aer", "Serv"]
@@ -46,6 +58,19 @@ class SecondViewController: UIViewController, ASInterstitialViewControllerDelega
     
     
     // CALL BACK METHODS FOR INTERSTITIALS
+    
+    
+    func interstitialViewControllerDidVirtualCurrencyLoad(_ viewController: ASInterstitialViewController!, vcData: [AnyHashable : Any]!) {
+        print("@--- Interstitial ad with virtual currency rewarded: name =", vcData["name"] ?? "nil", ", rewardAmount =", vcData["rewardAmount"] ?? "nil", ", buyerName =", vcData["buyerName"] ?? "nil", ", buyerPrice =",  vcData["buyerPrice"] ?? "nil", " ---@")
+    }
+    
+    func interstitialViewControllerDidVirtualCurrencyReward(_ viewController: ASInterstitialViewController!, vcData: [AnyHashable : Any]!) {
+        print("@--- Interstitial ad did reward virtual curreny: name =", vcData["name"] ?? "nil", ", rewardAmount =", vcData["rewardAmount"] ?? "nil", "buyerName =", vcData["buyerName"] ?? "nil", ", buyerPrice =",  vcData["buyerPrice"] ?? "nil", " ---@")
+        
+        if let result = vcData["rewardAmount"] as? Int {
+            vc.incrementAmount(toAdd: result)
+        }
+    }
     
     //MARK: ASInterstitialViewController Delegate callback
     func interstitialViewControllerDidPreloadAd(_ viewController: ASInterstitialViewController!) {
@@ -62,9 +87,7 @@ class SecondViewController: UIViewController, ASInterstitialViewControllerDelega
         print("@--- Interstitial ad has transaction info: buyerName = ", transcationData["buyerName"] ?? "nil", ", buyerPrice = ",  transcationData["buyerPrice"] ?? "nil", " ---@")
     }
     
-    func interstitialViewControllerDidVirtualCurrencyLoad(_ viewController: ASInterstitialViewController!, vcData: [AnyHashable : Any]!) {
-        print("@--- Interstitial ad with virtual currency rewarded: name =", vcData["name"] ?? "nil", ", rewardAmount =", vcData["rewardAmount"] ?? "nil", ", buyerName =", vcData["buyerName"] ?? "nil", ", buyerPrice =",  vcData["buyerPrice"] ?? "nil", " ---@")
-    }
+
     
     func interstitialViewControllerWillAppear(_ viewController: ASInterstitialViewController!) {
         print("@--- Interstitial ad will appear ---@")
@@ -90,9 +113,7 @@ class SecondViewController: UIViewController, ASInterstitialViewControllerDelega
         print("@--- Interstitial ad was completed ---@")
     }
     
-    func interstitialViewControllerDidVirtualCurrencyReward(_ viewController: ASInterstitialViewController!, vcData: [AnyHashable : Any]!) {
-        print("@--- Interstitial ad did reward virtual curreny: name =", vcData["name"] ?? "nil", ", rewardAmount =", vcData["rewardAmount"] ?? "nil", "buyerName =", vcData["buyerName"] ?? "nil", ", buyerPrice =",  vcData["buyerPrice"] ?? "nil", " ---@")
-    }
+
     
     func interstitialViewControllerWillDisappear(_ viewController: ASInterstitialViewController!) {
         print("@--- Interstitial ad will disappear ---@")

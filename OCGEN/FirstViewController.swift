@@ -11,21 +11,23 @@ import AerServSDK
 
 
 class FirstViewController: UIViewController, ASAdViewDelegate {
-
+   
+    // Get a copy of the VC instance
+    var vc = VCInstance.sharedInstance
+    
     // State Control and other vars
     var isReady = false
     var bannerPlacementID = "380000"
     
     // Banner and interstitial objects
     var banner: ASAdView?
-
     
     // Declare my view variables here
     
     @IBOutlet weak var appTitle: UILabel!
     @IBOutlet weak var version: UILabel!
     @IBOutlet weak var gdpr: UILabel!
-    
+    @IBOutlet weak var energyVC: UILabel!
     
     @IBOutlet weak var generateOCButton: UIButton!
     @IBOutlet weak var resultOCText: UILabel!
@@ -35,8 +37,6 @@ class FirstViewController: UIViewController, ASAdViewDelegate {
     
     // On View load, do the following
     /*
- 
- 
      */
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,15 +44,19 @@ class FirstViewController: UIViewController, ASAdViewDelegate {
         // Set the UI text elements for this view.
         version?.text = String("SDK Version: " + AerServSDK.sdkVersion())
         gdpr?.text = String("GDPR Consent: " + String(AerServSDK.getGDPRConsentValue()))
+        energyVC?.text = String(vc.getAmount()) + " " +  vc.getCurrencyName();
 
-
+        load_banner()
         
-        load_banner();
-
     }
     
     
-    override func viewWillAppear(_ animated: Bool) { }
+    override func viewWillAppear(_ animated: Bool) {
+    
+        
+        energyVC?.text = String(vc.getAmount()) + " " +  vc.getCurrencyName();
+
+    }
     
     override func viewDidDisappear(_ animated: Bool) { }
     
