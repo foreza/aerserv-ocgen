@@ -126,8 +126,8 @@ class FirstViewController: UIViewController, ASAdViewDelegate {
     @IBAction func generateOC(_ sender: Any) {
         print ("[DEBUG] generating OC..")
             self.resultOCText.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-        self.spinner.stopAnimating()
-        
+        self.spinner.isHidden = true;
+    
         
     }
     
@@ -136,43 +136,43 @@ class FirstViewController: UIViewController, ASAdViewDelegate {
  
     func adViewDidPreloadAd(_ adView: ASAdView!) {
         isReady = true
-        print("@--- Banner ad is preloaded ---@")
+        print("[DEBUG] @--- Banner ad is preloaded ---@")
     }
     
     func adViewDidLoadAd(_ adView: ASAdView!) {
-        print("@--- Banner ad was loaded ---@")
+        print("[DEBUG] @--- Banner ad was loaded ---@")
     }
     
     func willPresentModalView(forAd adView: ASAdView!) {
-        print("@--- Banner will presented modal ---@")
+        print("[DEBUG] @--- Banner will presented modal ---@")
     }
     
     func adWasClicked(_ adView: ASAdView!) {
-        print("@--- Banner ad was clicked ---@")
+        print("[DEBUG] @--- Banner ad was clicked ---@")
     }
     
     func adViewDidFail(toLoadAd adView: ASAdView!, withError error: Error!) {
-        print("@--- Banner ad failed: ", error, " ---@")
+        print("[DEBUG] @--- Banner ad failed: ", error, " ---@")
     }
     
     func willLeaveApplicaton(fromAd adView: ASAdView!) {
-        print("@--- Banner ad left application ---@")
+        print("[DEBUG] @--- Banner ad left application ---@")
     }
     
     func adSizedChanged(_ adView: ASAdView!) {
-        print("@--- Banner ad sized changed ---@")
+        print("[DEBUG] @--- Banner ad sized changed ---@")
     }
     
     func adViewDidCompletePlaying(withVastAd adView: ASAdView!) {
-        print("@--- Banner ad completed playing vast ---@")
+        print("[DEBUG] @--- Banner ad completed playing vast ---@")
     }
     
     func adView(_ adView: ASAdView!, didShowAdWithTransactionInfo transcationData: [AnyHashable : Any]!) {
-        print("@--- Banner ad has transaction info: buyerName = ", transcationData["buyerName"] ?? "nil", ", buyerPrice = ",  transcationData["buyerPrice"] ?? "nil", " ---@")
+        print("[DEBUG] @--- Banner ad has transaction info: buyerName = ", transcationData["buyerName"] ?? "nil", ", buyerPrice = ",  transcationData["buyerPrice"] ?? "nil", " ---@")
     }
     
     func didDismissModalView(forAd adView: ASAdView!) {
-        print("@--- Banner ad did dismissed modal ---@")
+        print("[DEBUG] @--- Banner ad did dismissed modal ---@")
     }
 
 
