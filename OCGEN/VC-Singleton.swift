@@ -9,18 +9,21 @@
 import Foundation
 
 class VCInstance {
-    // We only want once intance of this ever.
+    
+    // We only want once intance of this ever, by defintion of the Singleton
     static let sharedInstance = VCInstance()
     
-    // Initialize variables
+    // Initialize variables. Control amounts, initial amounts, and currency name here
     var currencyName = "Energy"
     var amount : Int = 0
     var initialAmount : Int = 0
+    var spendAmount : Int = 5
     var saveFile = "db.txt"
     
-    // TODO: Don't let others initialize a type of VCInstance using empty constructor
-    //This prevents others from using the default '()' initializer for this class.
-
+    
+    // ** [INIT] **
+    // Initialize the singleton class here.
+    
     private init() {
         
         // Verify that only one instance is ever created
@@ -35,9 +38,17 @@ class VCInstance {
     }
     
     
+    // ** [ACCESSORS] **
+    // Methods that get / return and do not change the data
+    
     // Get the currency name
     func getCurrencyName() -> String {
         return currencyName
+    }
+    
+    // Get the spend amount
+    func getSpendAmount() -> Int {
+        return spendAmount
     }
     
     // Get the current amount
@@ -47,11 +58,15 @@ class VCInstance {
     
     // Check if the amount if valid for this 'transaction'
     func checkAmountIsValid(toCheck: Int) -> Bool {
-        if (toCheck < amount){
+        if (toCheck > amount){
             return false
         }
         return true
     }
+    
+    
+    // ** [MUTATORS] **
+    // Methods that increment, decrement, or set variables
     
     // Method to increment the amount
     func incrementAmount(toAdd: Int) {
@@ -77,7 +92,8 @@ class VCInstance {
     
 
     
-    // ** READ / WRITE METHODS CALLED ONLY BY THIS SINGLETON CLASS **
+    // ** [FILE READ/WRITE/MANIPULATION] **
+    // READ / WRITE METHODS CALLED ONLY BY THIS SINGLETON CLASS
     
     // Class method to save the amount in the application - called very often!
     private func saveLocalAmount() {
@@ -101,8 +117,6 @@ class VCInstance {
             print("error:", error)
         }
     }
-    
-    
     
     // Checks the local storage to see if we do have the local energy amount stored
     private func checkLocalSave() -> Bool {
@@ -134,14 +148,6 @@ class VCInstance {
     }
     
     // Sets up a db.txt file if one does not yet exist already
-    /*
-     https://stackoverflow.com/questions/24097826/read-and-write-a-string-from-text-file
-     https://stackoverflow.com/questions/24181699/how-to-check-if-a-file-exists-in-the-documents-directory-in-swift
-     http://swiftdeveloperblog.com/code-examples/check-if-file-exist/
-     https://stackoverflow.com/questions/27062454/converting-url-to-string-and-back-again
-     https://stackoverflow.com/questions/34135305/nsfilemanager-defaultmanager-fileexistsatpath-returns-false-instead-of-true
-     https://stackoverflow.com/questions/24115141/converting-string-to-int-with-swift
-     */
     private func initLocalSave() {
         
         do {
