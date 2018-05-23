@@ -14,15 +14,26 @@ class VCInstance {
     
     // Initialize variables
     var currencyName = "Energy"
-    var amount = 0
+    var amount : Int = 0
+    var initialAmount : Int = 0
+    var saveFile = "db.txt"
     
     // TODO: Don't let others initialize a type of VCInstance using empty constructor
     //This prevents others from using the default '()' initializer for this class.
 
     private init() {
+        
+        // Verify that only one instance is ever created
         print("[DEBUG] VC - Singleton instance VCInstance created" )
-
+        
+        // If a local save instance does not exist, create one
+        if !(checkLocalSave()) {
+            initLocalSave()
+        }
+        // Otherwise, read from the local save and set it to the correct amount
+        setAmount(toSet: readValueFromLocalSave())
     }
+    
     
     // Get the currency name
     func getCurrencyName() -> String {
@@ -36,12 +47,129 @@ class VCInstance {
     
     // Method to increment the amount
     func incrementAmount(toAdd: Int) {
-        
-        if (toAdd != nil) {
-            amount += toAdd
-            print("[DEBUG] VC - VC new amount is \(amount)")
+        amount += toAdd
+        print("[DEBUG] VC incrementAmount - VC new amount is \(amount)")
+        saveLocalAmount()
+    }
+    
+    // Class method to set the amount in the application
+    func setAmount(toSet: Int) {
+        amount = toSet
+        print("[DEBUG] VC setAmount - VC new amount is \(amount)")
+        saveLocalAmount()
+    }
+    
+    
+    
+    
+    //// READ / WRITE METHODS CALLED ONLY BY THIS SINGLETON CLASS
+    
+    // Class method to save the amount in the application
+    private func saveLocalAmount() {
+        do {
+            // get the documents folder url
+            if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                
+                // create the destination url for the text file to be saved
+                let fileURL = documentDirectory.appendingPathComponent(saveFile)
+                
+                //  HAve the text to be the value of VC at present; convert to String
+                let text = String(amount)
+                
+                // writing to disk
+                try text.write(to: fileURL, atomically: false, encoding: .utf8)
+                print("[DEBUG] saving was successful at \(fileURL)")
+                print("[DEBUG] VC saveLocalAmount - VC amount is \(text)")
+                
+            }
+        } catch {
+            print("error:", error)
+        }
+    }
+    
+    
+    
+    // Checks the local storage to see if we do have the local energy amount stored
+    func checkLocalSave() -> Bool {
+        do {
+            // Get the documents folder url
+            let fileManager = FileManager.default
+            
+            if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                
+                // Create the destination url for the text file to be saved
+                let fileURL = documentDirectory.appendingPathComponent(saveFile)
+                
+                // If the file exists, return true
+                if fileManager.fileExists(atPath: fileURL.path) {
+                    print("[DEBUG] VC checkLocalSave - File exists")
+                    return true
+                    
+                } else {
+                    print("[DEBUG] VC checkLocalSave - File not found")
+                    return false
+                }
+            }
+        } catch {
+            print("[DEBUG] VC checkLocalSave - error:", error)
         }
         
+       return false
+      
     }
+    
+    // Sets up a db.txt file if one does not yet exist already
+    /*
+     https://stackoverflow.com/questions/24097826/read-and-write-a-string-from-text-file
+     https://stackoverflow.com/questions/24181699/how-to-check-if-a-file-exists-in-the-documents-directory-in-swift
+     http://swiftdeveloperblog.com/code-examples/check-if-file-exist/
+     https://stackoverflow.com/questions/27062454/converting-url-to-string-and-back-again
+     https://stackoverflow.com/questions/34135305/nsfilemanager-defaultmanager-fileexistsatpath-returns-false-instead-of-true
+     https://stackoverflow.com/questions/24115141/converting-string-to-int-with-swift
+     */
+    func initLocalSave() {
+        
+        do {
+            
+            // Get the documents folder url
+            if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                
+                // Create the destination url for the text file to be saved
+                let fileURL = documentDirectory.appendingPathComponent(saveFile)
+               
+                // Initialize the text to be the value of VC, and convert for writing purposes
+                let text = String(initialAmount)
+                
+                // Write to the disk
+                try text.write(to: fileURL, atomically: false, encoding: .utf8)
+                print("[DEBUG] VC initLocalSave - creation was successful at \(fileURL)")
+            }
+        } catch {
+            print("error:", error)
+        }
+    }
+    
+    // Reads the value from the local saved file and returns it to the calling function
+    func readValueFromLocalSave() -> Int {
+            
+            do {
+                // Get the documents folder url
+                if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                    
+                    // Create the destination url for the text file to be accessed
+                    let fileURL = documentDirectory.appendingPathComponent(saveFile)
+                    let savedValue = try String(contentsOf: fileURL)
+                    print("[DEBUG] VC readValueFromLocalSave - \(type(of:savedValue)) value from \(fileURL):  \(savedValue)" )
+                    let retValue : Int = Int(savedValue)!
+                    return retValue
+                }
+            } catch {
+                print("[DEBUG] error:", error)
+            }
+        
+        return 0;
+    
+    }
+      
     
 }

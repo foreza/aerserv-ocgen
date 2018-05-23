@@ -45,7 +45,6 @@ class FirstViewController: UIViewController, ASAdViewDelegate {
         version?.text = String("SDK Version: " + AerServSDK.sdkVersion())
         gdpr?.text = String("GDPR Consent: " + String(AerServSDK.getGDPRConsentValue()))
         energyVC?.text = String(vc.getAmount()) + " " +  vc.getCurrencyName();
-
         load_banner()
         
     }
