@@ -14,8 +14,8 @@
 		9AAE76B620AE47400052B2AB /* AerServSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE76B520AE47400052B2AB /* AerServSDK.framework */; };
 		9AAE76B720AE47F50052B2AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AEB795320AE2D54004C9D5F /* LaunchScreen.storyboard */; };
 		9AEB794920AE2D52004C9D5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEB794820AE2D52004C9D5F /* AppDelegate.swift */; };
-		9AEB794B20AE2D52004C9D5F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEB794A20AE2D52004C9D5F /* FirstViewController.swift */; };
-		9AEB794D20AE2D52004C9D5F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEB794C20AE2D52004C9D5F /* SecondViewController.swift */; };
+		9AEB794B20AE2D52004C9D5F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEB794A20AE2D52004C9D5F /* MainViewController.swift */; };
+		9AEB794D20AE2D52004C9D5F /* EarningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEB794C20AE2D52004C9D5F /* EarningViewController.swift */; };
 		9AEB795020AE2D52004C9D5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AEB794E20AE2D52004C9D5F /* Main.storyboard */; };
 		9AEB795220AE2D54004C9D5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AEB795120AE2D54004C9D5F /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -29,8 +29,8 @@
 		9AAE76B520AE47400052B2AB /* AerServSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AerServSDK.framework; path = OCGEN/AerServSDK.framework; sourceTree = "<group>"; };
 		9AEB794520AE2D52004C9D5F /* OCGEN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCGEN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AEB794820AE2D52004C9D5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9AEB794A20AE2D52004C9D5F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		9AEB794C20AE2D52004C9D5F /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		9AEB794A20AE2D52004C9D5F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		9AEB794C20AE2D52004C9D5F /* EarningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningViewController.swift; sourceTree = "<group>"; };
 		9AEB794F20AE2D52004C9D5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9AEB795120AE2D54004C9D5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9AEB795420AE2D54004C9D5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -84,8 +84,8 @@
 			children = (
 				9AEB794820AE2D52004C9D5F /* AppDelegate.swift */,
 				92DAD49C20B37C1A00E2678B /* VC-Singleton.swift */,
-				9AEB794A20AE2D52004C9D5F /* FirstViewController.swift */,
-				9AEB794C20AE2D52004C9D5F /* SecondViewController.swift */,
+				9AEB794A20AE2D52004C9D5F /* MainViewController.swift */,
+				9AEB794C20AE2D52004C9D5F /* EarningViewController.swift */,
 				9AEB794E20AE2D52004C9D5F /* Main.storyboard */,
 				9AEB795120AE2D54004C9D5F /* Assets.xcassets */,
 				9AEB795320AE2D54004C9D5F /* LaunchScreen.storyboard */,
@@ -167,10 +167,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AEB794D20AE2D52004C9D5F /* SecondViewController.swift in Sources */,
+				9AEB794D20AE2D52004C9D5F /* EarningViewController.swift in Sources */,
 				9AEB794920AE2D52004C9D5F /* AppDelegate.swift in Sources */,
 				92DAD49D20B37C1A00E2678B /* VC-Singleton.swift in Sources */,
-				9AEB794B20AE2D52004C9D5F /* FirstViewController.swift in Sources */,
+				9AEB794B20AE2D52004C9D5F /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

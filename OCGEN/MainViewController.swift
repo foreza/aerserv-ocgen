@@ -10,7 +10,7 @@ import UIKit
 import AerServSDK
 
 
-class FirstViewController: UIViewController, ASAdViewDelegate {
+class MainViewController: UIViewController, ASAdViewDelegate {
    
     // Get a copy of the VC instance
     var vc = VCInstance.sharedInstance

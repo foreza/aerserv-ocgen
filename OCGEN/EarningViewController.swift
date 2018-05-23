@@ -11,7 +11,7 @@ import AerServSDK
 
 
 
-class SecondViewController: UIViewController, ASInterstitialViewControllerDelegate {
+class EarningViewController: UIViewController, ASInterstitialViewControllerDelegate {
 
     var vc = VCInstance.sharedInstance
     
