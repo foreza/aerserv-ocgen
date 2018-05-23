@@ -45,10 +45,25 @@ class VCInstance {
         return amount
     }
     
+    // Check if the amount if valid for this 'transaction'
+    func checkAmountIsValid(toCheck: Int) -> Bool {
+        if (toCheck < amount){
+            return false
+        }
+        return true
+    }
+    
     // Method to increment the amount
     func incrementAmount(toAdd: Int) {
         amount += toAdd
         print("[DEBUG] VC incrementAmount - VC new amount is \(amount)")
+        saveLocalAmount()
+    }
+    
+    // Method to decrement the amount
+    func decrementAmount(toTake: Int) {
+        amount -= toTake
+        print("[DEBUG] VC decrementAmount - VC new amount is \(amount)")
         saveLocalAmount()
     }
     
@@ -60,11 +75,11 @@ class VCInstance {
     }
     
     
+
     
+    // ** READ / WRITE METHODS CALLED ONLY BY THIS SINGLETON CLASS **
     
-    //// READ / WRITE METHODS CALLED ONLY BY THIS SINGLETON CLASS
-    
-    // Class method to save the amount in the application
+    // Class method to save the amount in the application - called very often!
     private func saveLocalAmount() {
         do {
             // get the documents folder url
@@ -90,7 +105,7 @@ class VCInstance {
     
     
     // Checks the local storage to see if we do have the local energy amount stored
-    func checkLocalSave() -> Bool {
+    private func checkLocalSave() -> Bool {
         do {
             // Get the documents folder url
             let fileManager = FileManager.default
@@ -127,7 +142,7 @@ class VCInstance {
      https://stackoverflow.com/questions/34135305/nsfilemanager-defaultmanager-fileexistsatpath-returns-false-instead-of-true
      https://stackoverflow.com/questions/24115141/converting-string-to-int-with-swift
      */
-    func initLocalSave() {
+    private func initLocalSave() {
         
         do {
             
