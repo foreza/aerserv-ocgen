@@ -16,7 +16,7 @@ class VCInstance {
     // Initialize variables. Control amounts, initial amounts, and currency name here
     var currencyName = "Energy"
     var amount : Int = 0
-    var initialAmount : Int = 0
+    var initialAmount : Int = 10000
     var spendAmount : Int = 5
     var saveFile = "db.txt"
     
