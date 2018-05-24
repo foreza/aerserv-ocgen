@@ -31,9 +31,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     @IBOutlet weak var resultOCText: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-    
-    // ** [CORE] **
-    // Core application function
+    // MARK: - CORE - Core application function
     
     // This function is called to generate an OC. It will take some currency.
     @IBAction func generateOC(_ sender: Any) {
@@ -68,8 +66,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     }
     
     
-    // ** [VIEW] **
-    // View controller functions
+    // MARK: - VIEW - View controller functions
     
     // On the initial view load, do the following:
     override func viewDidLoad() {
@@ -155,8 +152,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     
     
     
-    // ** [ASAdViewDelegate Depencency]
-    // Required for ASAdViewDelegate
+    // MARK: - ASAdViewDelegate Dependency -  Required for ASAdViewDelegate
     
     func viewControllerForPresentingModalView() -> UIViewController! {
         return self
@@ -165,8 +161,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     
     
     
-    // ** [UTILS] **
-    // Utility functions to control the strings that are displayed on the labels
+    // MARK: - UTILS - Utility functions to control strings
     
     // Util for controlling the energy display text
     func util_createEnergyDisplayText() -> String {
@@ -186,9 +181,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     
     
     
-    // ** [CALLBACKS] **
-    // Callback functions we are subscribed to. All of the below ones are from the AerServ SDK
-    // TODO: Clean up the ones we do not need
+    // MARK: - CALLBACKS - Callback functions we are subscribed to
  
     // In use: when the ad is preloaded - set isReady to true to disable any 'loading' behavior / show the ad.
     func adViewDidPreloadAd(_ adView: ASAdView!) {
