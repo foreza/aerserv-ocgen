@@ -14,6 +14,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
    
     // Get a copy of the VC instance
     var vc = VCInstance.sharedInstance
+    var gd = GDPRInstance.sharedInstance
     
     // State Control and other vars
     var isReady = false
@@ -68,6 +69,13 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     
     // MARK: - VIEW - View controller functions
     
+    @IBAction func editGDPR(_ sender: Any) {
+        gd.setEditMode(toSet: true)
+        performSegue(withIdentifier: "ModifyGDPRSettings", sender: sender)
+    }
+    
+    
+    
     // On the initial view load, do the following:
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +90,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
         
     }
     
+
     
     // Every time the view appears, do the following:
     override func viewWillAppear(_ animated: Bool) {
@@ -149,6 +158,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
     
     
     

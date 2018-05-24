@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		92DAD49D20B37C1A00E2678B /* VC-Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DAD49C20B37C1A00E2678B /* VC-Singleton.swift */; };
+		923E78F220B73E1900410E37 /* StatGenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E78F120B73E1900410E37 /* StatGenController.swift */; };
+		923E78F620B7432B00410E37 /* GDPRPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E78F520B7432B00410E37 /* GDPRPopover.swift */; };
+		92AEBDAA20B7652C00854CDB /* GDPRSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEBDA920B7652C00854CDB /* GDPRSingleton.swift */; };
+		92DAD49D20B37C1A00E2678B /* VCSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DAD49C20B37C1A00E2678B /* VCSingleton.swift */; };
 		9A0768A120AE45FC003DBCE4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */; };
 		9A393E6920AE347700685EC1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6820AE347700685EC1 /* WebKit.framework */; };
 		9A393E6B20AE348500685EC1 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6A20AE348500685EC1 /* libxml2.2.tbd */; };
@@ -21,7 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		92DAD49C20B37C1A00E2678B /* VC-Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC-Singleton.swift"; sourceTree = "<group>"; };
+		923E78F120B73E1900410E37 /* StatGenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatGenController.swift; sourceTree = "<group>"; };
+		923E78F520B7432B00410E37 /* GDPRPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDPRPopover.swift; sourceTree = "<group>"; };
+		92AEBDA920B7652C00854CDB /* GDPRSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDPRSingleton.swift; sourceTree = "<group>"; };
+		92DAD49C20B37C1A00E2678B /* VCSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSingleton.swift; sourceTree = "<group>"; };
 		9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9A393E6820AE347700685EC1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9A393E6A20AE348500685EC1 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
@@ -82,9 +88,12 @@
 		9AEB794720AE2D52004C9D5F /* OCGEN */ = {
 			isa = PBXGroup;
 			children = (
+				923E78F520B7432B00410E37 /* GDPRPopover.swift */,
+				92AEBDA920B7652C00854CDB /* GDPRSingleton.swift */,
 				9AEB794820AE2D52004C9D5F /* AppDelegate.swift */,
-				92DAD49C20B37C1A00E2678B /* VC-Singleton.swift */,
+				92DAD49C20B37C1A00E2678B /* VCSingleton.swift */,
 				9AEB794A20AE2D52004C9D5F /* MainViewController.swift */,
+				923E78F120B73E1900410E37 /* StatGenController.swift */,
 				9AEB794C20AE2D52004C9D5F /* EarningViewController.swift */,
 				9AEB794E20AE2D52004C9D5F /* Main.storyboard */,
 				9AEB795120AE2D54004C9D5F /* Assets.xcassets */,
@@ -167,9 +176,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				923E78F620B7432B00410E37 /* GDPRPopover.swift in Sources */,
 				9AEB794D20AE2D52004C9D5F /* EarningViewController.swift in Sources */,
+				92AEBDAA20B7652C00854CDB /* GDPRSingleton.swift in Sources */,
+				923E78F220B73E1900410E37 /* StatGenController.swift in Sources */,
 				9AEB794920AE2D52004C9D5F /* AppDelegate.swift in Sources */,
-				92DAD49D20B37C1A00E2678B /* VC-Singleton.swift in Sources */,
+				92DAD49D20B37C1A00E2678B /* VCSingleton.swift in Sources */,
 				9AEB794B20AE2D52004C9D5F /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
