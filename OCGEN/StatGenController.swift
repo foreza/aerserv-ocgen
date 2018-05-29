@@ -81,6 +81,9 @@ class StatGenController: UIViewController, ASAdViewDelegate {
         
         // Perform metrics
         metrics_analyzeRoll(type: 0, value: rollTotal)
+        
+        // Decrement VC
+        vc.decrementAmount(toTake: vc.getSpendAmount())
 
 
     }

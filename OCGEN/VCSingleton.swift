@@ -17,7 +17,7 @@ class VCInstance {
     var currencyName = "Energy"
     var amount : Int = 0
     var initialAmount : Int = 10000
-    var spendAmount : Int = 5
+    var spendAmount : Int = 10
     var saveFile = "db.txt"
     
     
