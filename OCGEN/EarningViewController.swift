@@ -9,10 +9,9 @@
 import UIKit
 import AerServSDK
 
-
-
 class EarningViewController: UIViewController, ASInterstitialViewControllerDelegate {
-
+    
+    // Get a singleton VC instance
     var vc = VCInstance.sharedInstance
     
     // State Control and other vars
@@ -27,10 +26,12 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     @IBOutlet weak var showInterstitial: UIButton!
     @IBOutlet weak var adLoadSpinner: UIActivityIndicatorView!
     
+    
+    // MARK: - VIEW - View controller functions
+    
+    // On the initial view load, do the following:
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
         
         // Preload the interstitial
         preload_interstitial()
@@ -43,11 +44,10 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
         adLoadSpinner?.isHidden = false;
         adLoadSpinner?.startAnimating();
 
-        
     }
     
+    // Every time the view appears, do the following:
     override func viewWillAppear(_ animated: Bool) {
-        
         
         if (!preloadReady) {
             // Preload the interstitial
@@ -59,12 +59,8 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
             adLoadSpinner?.startAnimating();
         }
  
-        
         // Set all text elements
         earnEnergyVC?.text = String(vc.getAmount()) + " " +  vc.getCurrencyName();
-        
-
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,9 +68,10 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
         // Dispose of any resources that can be recreated.
     }
     
-    // Pre-load interstitial
+    
+    
+    // Called by the initial and the viewWillAppear to pre-load the interstitial
     func preload_interstitial() {
-        
         interstitial = ASInterstitialViewController(forPlacementID: interstitialPlacementID, with:self)
         interstitial?.keyWords = ["Aer", "Serv"]
         interstitial?.locationServicesEnabled = true
@@ -83,6 +80,7 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
         interstitial?.loadAd()
     }
     
+    // Button to show the interstitial
     @IBAction func show_interstitial() {
         interstitial?.show(from: self)
         preloadReady = false
@@ -90,35 +88,39 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
 
     
     
-    // CALL BACK METHODS FOR INTERSTITIALS
+    // MARK: - ASInterstitialViewController CB - CALL BACK METHODS FOR INTERSTITIALS
     
-    
+    // On VC confirmed for ad placement
     func interstitialViewControllerDidVirtualCurrencyLoad(_ viewController: ASInterstitialViewController!, vcData: [AnyHashable : Any]!) {
         print("[DEBUG] @--- Interstitial ad with virtual currency rewarded: name =", vcData["name"] ?? "nil", ", rewardAmount =", vcData["rewardAmount"] ?? "nil", ", buyerName =", vcData["buyerName"] ?? "nil", ", buyerPrice =",  vcData["buyerPrice"] ?? "nil", " ---@")
     }
     
+    // On VC awarded
     func interstitialViewControllerDidVirtualCurrencyReward(_ viewController: ASInterstitialViewController!, vcData: [AnyHashable : Any]!) {
         print("[DEBUG] @--- Interstitial ad did reward virtual curreny: name =", vcData["name"] ?? "nil", ", rewardAmount =", vcData["rewardAmount"] ?? "nil", "buyerName =", vcData["buyerName"] ?? "nil", ", buyerPrice =",  vcData["buyerPrice"] ?? "nil", " ---@")
         
+        // Increment the VC in the singleton instance
         if let result = vcData["rewardAmount"] as? Int {
             vc.incrementAmount(toAdd: result)
         }
     }
     
-    //MARK: ASInterstitialViewController Delegate callback
+    // On Ad preloaded
     func interstitialViewControllerDidPreloadAd(_ viewController: ASInterstitialViewController!) {
-        print("[DEBUG] @--- Interstitial ad preload ready ---@");
+        print("[DEBUG] @--- [PRELOAD] Interstitial ad preload ready ---@");
         showInterstitial?.isHidden = false
         adLoadSpinner.stopAnimating()
         adLoadSpinner.isHidden = true
         preloadReady = true
     }
     
-//    func interstitialViewControllerAdLoadedSuccessfully(_ viewController: ASInterstitialViewController!) {
-//        print("[DEBUG] @--- Interstitial ad loaded ---@")
-//        interstitial?.show(from: self)
-//    }
+    // On ad loaded (not used)
+    func interstitialViewControllerAdLoadedSuccessfully(_ viewController: ASInterstitialViewController!) {
+        print("[DEBUG] @--- [NO PRELOAD] Interstitial ad loaded ---@")
+        interstitial?.show(from: self)
+    }
     
+    // On ad shown
     func interstitialViewController(_ viewController: ASInterstitialViewController!, didShowAdWithTransactionInfo transcationData: [AnyHashable : Any]!) {
         print("[DEBUG] @--- Interstitial ad has transaction info: buyerName = ", transcationData["buyerName"] ?? "nil", ", buyerPrice = ",  transcationData["buyerPrice"] ?? "nil", " ---@")
     }

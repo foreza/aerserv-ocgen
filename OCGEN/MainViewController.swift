@@ -42,9 +42,9 @@ class MainViewController: UIViewController, ASAdViewDelegate {
         if (chargeVC()){
             self.resultOCText.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
             self.spinner.isHidden = true;
-            print ("[DEBUG] generateOC - success!")
+            // print ("[DEBUG] generateOC - success!")
         } else {
-            print ("[DEBUG] generateOC - insufficient funds")
+            // print ("[DEBUG] generateOC - insufficient funds")
         }
         
     }
@@ -146,7 +146,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
         banner?.keyWords = ["Aer", "Serv"]
         banner?.sizeAdToFit = true;
         
-        print("[DEBUG] load_banner - xPos is \(xPos) and yPos is \(yPos) for the display")
+        //print("[DEBUG] load_banner - xPos is \(xPos) and yPos is \(yPos) for the display")
         
         // Add to the subview, unwrap, and then load
         view.addSubview(banner!)
@@ -196,52 +196,52 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     // In use: when the ad is preloaded - set isReady to true to disable any 'loading' behavior / show the ad.
     func adViewDidPreloadAd(_ adView: ASAdView!) {
         isReady = true
-        print("[DEBUG] @--- Banner ad is preloaded ---@")
+        //print("[DEBUG] @--- Banner ad is preloaded ---@")
     }
     
     // Not used: when the ad is loaded (not preloaded)
     func adViewDidLoadAd(_ adView: ASAdView!) {
-        print("[DEBUG] @--- Banner ad was loaded ---@")
+        //print("[DEBUG] @--- Banner ad was loaded ---@")
     }
     
     // Not used:
     func willPresentModalView(forAd adView: ASAdView!) {
-        print("[DEBUG] @--- Banner will presented modal ---@")
+        //print("[DEBUG] @--- Banner will presented modal ---@")
     }
     
     // Not used: when the ad is clicked, register some behavior
     func adWasClicked(_ adView: ASAdView!) {
-        print("[DEBUG] @--- Banner ad was clicked ---@")
+        //print("[DEBUG] @--- Banner ad was clicked ---@")
     }
     
     // Not used: when the ad fails to load / preload, register some behavior
     func adViewDidFail(toLoadAd adView: ASAdView!, withError error: Error!) {
-        print("[DEBUG] @--- Banner ad failed: ", error, " ---@")
+        //print("[DEBUG] @--- Banner ad failed: ", error, " ---@")
     }
     
     // Not used:
     func willLeaveApplicaton(fromAd adView: ASAdView!) {
-        print("[DEBUG] @--- Banner ad left application ---@")
+        //print("[DEBUG] @--- Banner ad left application ---@")
     }
     
     // Not used:
     func adSizedChanged(_ adView: ASAdView!) {
-        print("[DEBUG] @--- Banner ad sized changed ---@")
+        //print("[DEBUG] @--- Banner ad sized changed ---@")
     }
     
     // Not used: when a VAST ad finishes, register some behavior
     func adViewDidCompletePlaying(withVastAd adView: ASAdView!) {
-        print("[DEBUG] @--- Banner ad completed playing vast ---@")
+        //print("[DEBUG] @--- Banner ad completed playing vast ---@")
     }
     
     // Not used: when an ad does show, register some behavior
     func adView(_ adView: ASAdView!, didShowAdWithTransactionInfo transcationData: [AnyHashable : Any]!) {
-        print("[DEBUG] @--- Banner ad has transaction info: buyerName = ", transcationData["buyerName"] ?? "nil", ", buyerPrice = ",  transcationData["buyerPrice"] ?? "nil", " ---@")
+        //print("[DEBUG] @--- Banner ad has transaction info: buyerName = ", transcationData["buyerName"] ?? "nil", ", buyerPrice = ",  transcationData["buyerPrice"] ?? "nil", " ---@")
     }
     
     // Not used:
     func didDismissModalView(forAd adView: ASAdView!) {
-        print("[DEBUG] @--- Banner ad did dismissed modal ---@")
+        //print("[DEBUG] @--- Banner ad did dismissed modal ---@")
     }
 
 

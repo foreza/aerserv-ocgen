@@ -21,13 +21,11 @@ class VCInstance {
     var saveFile = "db.txt"
     
     
-    // ** [INIT] **
-    // Initialize the singleton class here.
-    
+    // MARK: - Initialization - Initialize the singleton class here.
+
+    // Only one instance is ever created and disallow VCInstance() with empty constructor
     private init() {
-        
-        // Verify that only one instance is ever created
-        print("[DEBUG] VC - Singleton instance VCInstance created" )
+        //print("[DEBUG] VC - Singleton instance VCInstance created" )
         
         // If a local save instance does not exist, create one
         if !(checkLocalSave()) {
@@ -38,8 +36,7 @@ class VCInstance {
     }
     
     
-    // ** [ACCESSORS] **
-    // Methods that get / return and do not change the data
+    // MARK: - Accessors - Access singleton values here
     
     // Get the currency name
     func getCurrencyName() -> String {
@@ -65,34 +62,31 @@ class VCInstance {
     }
     
     
-    // ** [MUTATORS] **
-    // Methods that increment, decrement, or set variables
-    
+    // MARK: - Mutators - Modify singleton values here
+
     // Method to increment the amount
     func incrementAmount(toAdd: Int) {
         amount += toAdd
-        print("[DEBUG] VC incrementAmount - VC new amount is \(amount)")
+        //print("[DEBUG] VC incrementAmount - VC new amount is \(amount)")
         saveLocalAmount()
     }
     
     // Method to decrement the amount
     func decrementAmount(toTake: Int) {
         amount -= toTake
-        print("[DEBUG] VC decrementAmount - VC new amount is \(amount)")
+        //print("[DEBUG] VC decrementAmount - VC new amount is \(amount)")
         saveLocalAmount()
     }
     
     // Class method to set the amount in the application
     func setAmount(toSet: Int) {
         amount = toSet
-        print("[DEBUG] VC setAmount - VC new amount is \(amount)")
+        //print("[DEBUG] VC setAmount - VC new amount is \(amount)")
         saveLocalAmount()
     }
     
     
-
-    
-    // ** [FILE READ/WRITE/MANIPULATION] **
+    // MARK: - File I/O -  [FILE READ/WRITE/MANIPULATION] **
     // READ / WRITE METHODS CALLED ONLY BY THIS SINGLETON CLASS
     
     // Class method to save the amount in the application - called very often!
@@ -109,14 +103,15 @@ class VCInstance {
                 
                 // writing to disk
                 try text.write(to: fileURL, atomically: false, encoding: .utf8)
-                print("[DEBUG] saving was successful at \(fileURL)")
-                print("[DEBUG] VC saveLocalAmount - VC amount is \(text)")
+                //print("[DEBUG] saving was successful at \(fileURL)")
+                //print("[DEBUG] VC saveLocalAmount - VC amount is \(text)")
                 
             }
         } catch {
             print("error:", error)
         }
     }
+    
     
     // Checks the local storage to see if we do have the local energy amount stored
     private func checkLocalSave() -> Bool {
@@ -131,7 +126,7 @@ class VCInstance {
                 
                 // If the file exists, return true
                 if fileManager.fileExists(atPath: fileURL.path) {
-                    print("[DEBUG] VC checkLocalSave - File exists")
+                    //print("[DEBUG] VC checkLocalSave - File exists")
                     return true
                     
                 } else {
@@ -146,6 +141,7 @@ class VCInstance {
        return false
       
     }
+    
     
     // Sets up a db.txt file if one does not yet exist already
     private func initLocalSave() {
@@ -163,12 +159,13 @@ class VCInstance {
                 
                 // Write to the disk
                 try text.write(to: fileURL, atomically: false, encoding: .utf8)
-                print("[DEBUG] VC initLocalSave - creation was successful at \(fileURL)")
+                //print("[DEBUG] VC initLocalSave - creation was successful at \(fileURL)")
             }
         } catch {
             print("error:", error)
         }
     }
+    
     
     // Reads the value from the local saved file and returns it to the calling function
     func readValueFromLocalSave() -> Int {
@@ -180,7 +177,7 @@ class VCInstance {
                     // Create the destination url for the text file to be accessed
                     let fileURL = documentDirectory.appendingPathComponent(saveFile)
                     let savedValue = try String(contentsOf: fileURL)
-                    print("[DEBUG] VC readValueFromLocalSave - \(type(of:savedValue)) value from \(fileURL):  \(savedValue)" )
+                    // print("[DEBUG] VC readValueFromLocalSave - \(type(of:savedValue)) value from \(fileURL):  \(savedValue)" )
                     let retValue : Int = Int(savedValue)!
                     return retValue
                 }

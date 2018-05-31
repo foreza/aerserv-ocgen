@@ -35,34 +35,31 @@ class StatGenController: UIViewController, ASAdViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set the UI text elements for this view
-        
         // Use rollValues to easily access the @IBOutlet values
         rollValues = [strValue, dexValue,conValue, intValue, wisValue, chrValue]
-
         
     }
     
     
     // Every time the view appears, do the following:
     override func viewWillAppear(_ animated: Bool) {
-        
-        // Set the energy text using our utility function
-        
+        // TODO: Set the energy text using our utility function
     }
     
     // Every time the view disappears, do the following:
     override func viewDidDisappear(_ animated: Bool) { }
-    
 
-    
+    // Dependency of ASAdViewDelegate
     func viewControllerForPresentingModalView() -> UIViewController! {
         return self
     }
     
+    // MARK: - Stat Roll - Functions that will call other util / metric functions to provide stat rolls
+    
+    // Main function called by button press to perform a stat roll
     @IBAction func doStatRoll(_ sender: Any) {
         
-        print("[DEBUG] doStatRoll - Doing Stat Roll")
+        // print("[DEBUG] doStatRoll - Doing Stat Roll")
         
         // Declare any sort of metric collection totals
         var rollTotal = 0;
@@ -88,7 +85,7 @@ class StatGenController: UIViewController, ASAdViewDelegate {
 
     }
     
-    // Utility to calculate the4D6 roll
+    // Main function to calculate the 4D6 roll
     func roll4D6DropLowest() -> Int {
         
         var statArr = [0,0,0,0]        // Declare an array
@@ -115,6 +112,8 @@ class StatGenController: UIViewController, ASAdViewDelegate {
         return finalStatVal
     }
     
+    // MARK: - Metrics - Functions that will parse data and provide insight about the rolls
+    
     // Function to analyze the roll that was just performed
     func metrics_analyzeRoll(type: Int, value : Int){
         
@@ -129,6 +128,10 @@ class StatGenController: UIViewController, ASAdViewDelegate {
         statSummary?.text = "metrics_analyzeRoll roll total was: \(value)"
         
     }
+    
+    
+    // MARK: - Utility - Util functions that will perform basic but critical tasks many times
+
     
     // Utility to update a given text label
     func util_updateTextLabel(label : UILabel!, value : Int){
