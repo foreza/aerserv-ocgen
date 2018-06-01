@@ -15,12 +15,12 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     var vc = VCInstance.sharedInstance
     
     // State Control and other vars
-    var interstitialPlacementID = "380004"
+    var interstitialPlacementID = "380315"
     var preloadReady = false
     
     // Banner and interstitial objects
     var interstitial: ASInterstitialViewController?
-    
+
     // Declare my view variables here
     @IBOutlet weak var earnEnergyVC: UILabel!
     @IBOutlet weak var showInterstitial: UIButton!
@@ -32,9 +32,6 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     // On the initial view load, do the following:
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Preload the interstitial
-        preload_interstitial()
         
         // Set all text elements
         earnEnergyVC?.text = String(vc.getAmount()) + " " +  vc.getCurrencyName();
@@ -51,7 +48,11 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
         
         if (!preloadReady) {
             // Preload the interstitial
-            preload_interstitial()
+            preload_interstitial(plc: interstitialPlacementID)
+            
+            // preload_secondary_interstitial(plc: secondaryInterstitialPlacementID)
+            // startSomethingWithDelayOnMain()
+
             
             // Set all view elements
             showInterstitial?.isHidden = true;
@@ -71,8 +72,11 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     
     
     // Called by the initial and the viewWillAppear to pre-load the interstitial
-    func preload_interstitial() {
-        interstitial = ASInterstitialViewController(forPlacementID: interstitialPlacementID, with:self)
+    func preload_interstitial(plc : String) {
+        
+        print("[DEBUG] - BEGIN preload_interstitial")
+        
+        interstitial = ASInterstitialViewController(forPlacementID: plc, with:self)
         interstitial?.keyWords = ["Aer", "Serv"]
         interstitial?.locationServicesEnabled = true
         interstitial?.userId = "AerServUser"
@@ -159,6 +163,33 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     }
     
 
+    
+    // Experimental Area
+    
+    var secondaryInterstitialPlacementID = "380004"
+    var secondaryInterstitial: ASInterstitialViewController?
+
+    
+    // PII-509
+    func startSomethingWithDelayOnMain() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) { // 2
+            print("[DEBUG] Main - startSomethingWithDelayOnMain: ", self.secondaryInterstitialPlacementID)
+            self.preload_secondary_interstitial(plc: self.secondaryInterstitialPlacementID)
+        }
+    }
+    
+    // PII-509 - Called by async to pre-load the interstitial
+    func preload_secondary_interstitial(plc : String) {
+        print("[DEBUG] - BEGIN preload_secondary_interstitial")
+        
+        secondaryInterstitial = ASInterstitialViewController(forPlacementID: plc, with:self)
+        secondaryInterstitial?.keyWords = ["Aer", "Serv"]
+        secondaryInterstitial?.locationServicesEnabled = true
+        secondaryInterstitial?.userId = "AerServUser"
+        secondaryInterstitial?.isPreload = true
+        secondaryInterstitial?.loadAd()
+    }
+    
 
 }
 
