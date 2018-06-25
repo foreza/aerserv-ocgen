@@ -135,14 +135,28 @@ class MainViewController: UIViewController, ASAdViewDelegate {
         // Configure the banner here
         banner = ASAdView(placementID: bannerPlacementID, andAdSize: ASBannerSize)
         
-        let viewWidth:CGFloat = view.frame.size.width
-        let viewHeight:CGFloat = view.frame.size.height
-        let xPos:CGFloat = (viewWidth - (ASBannerSize.width))/2
-        let yPos:CGFloat = viewHeight - (ASBannerSize.height)
+        let viewWidth:CGFloat = view.frame.size.width               // Get the view Width
+        let viewHeight:CGFloat = view.frame.size.height             // Get the view Height
+        let xPos:CGFloat = (viewWidth - (ASBannerSize.width))/2     // The xPos is (viewWidth - 320)/2
+        let yPos:CGFloat = viewHeight - (ASBannerSize.height)       // The yPos is viewHeight - 50
+        
+        // The Assuming a iphone 7 ( 1,334 x 750 ), the total would be
+        
+        /*
+         viewWidth = 750
+         viewHeight = 1334
+         xPos = 215
+         yPos = 1284
+        */
+        
         banner?.frame = CGRect.init(x: xPos, y: yPos, width: CGFloat(ASBannerSize.width), height: CGFloat(ASBannerSize.height))
+        
+        
+        // Ensure we are listening to the delegate callback functions
         banner?.delegate = self
         banner?.sizeAdToFit = true;
-        banner?.locationServicesEnabled = true
+        banner?.locationServicesEnabled = true;
+        banner?.bannerRefreshTimeInterval = 20.0;        // PII-523 set refresh interval
         banner?.keyWords = ["Aer", "Serv"]
         banner?.sizeAdToFit = true;
         

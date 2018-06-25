@@ -16,8 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {        
         
         // Perform Init for AerServ SDK
-        AerServSDK.initialize(withAppID: "380000")
-        
+        AerServSDK.initialize(withAppID: "1005910")     // PII-523 Banner Latency Test
+        // AerServSDK.initialize(withAppID: "380000")
+
         // Show log
         AerServSDK.showLogs(true)
         return true

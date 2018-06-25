@@ -49,7 +49,7 @@ class StatGenController: UIViewController, ASAdViewDelegate {
     // Every time the view disappears, do the following:
     override func viewDidDisappear(_ animated: Bool) { }
 
-    // Dependency of ASAdViewDelegate
+//    // Dependency of ASAdViewDelegate
     func viewControllerForPresentingModalView() -> UIViewController! {
         return self
     }
