@@ -4,7 +4,7 @@ An example application in Swift using AerServ's IOS SDK.
 This is a test application that serves as an example to propsective application developers and publishers that utilizes the latest features available in the IOS SDK.
 
 Our latest SDK release can be always found here:
-https://support.aerserv.com/hc/en-us/articles/204160170?_ga=2.21998267.1484224923.1529941710-96493196.1526683480
+https://support.aerserv.com/hc/en-us/articles/204160170
 
 
 This application currently implements the following functions:
