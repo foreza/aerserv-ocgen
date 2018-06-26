@@ -11,7 +11,6 @@ import AerServSDK
 import QuartzCore       // Required for CADisplayLink
 
 
-
 class MonsterViewController: UIViewController, ASAdViewDelegate {
     
     // Banner and interstitial objects
@@ -22,10 +21,12 @@ class MonsterViewController: UIViewController, ASAdViewDelegate {
     var displayLink : CADisplayLink?
     
     // Monsters!
-    var monster = Monster();
+    var monster = Monster(posX: 50.0, posY: 100.0, moveDistance: 2.0, name: "HamString", type: "shark", displayImageWidth: 100, displayImageHeight: 100);
+    var monster2 = Monster(posX: 70.0, posY: 300.0, moveDistance: 1.0, name: "Finn", type: "sword", displayImageWidth: 50, displayImageHeight: 50);
+
     
     // Todo: Couple this instead with the Monster.swift class so when we make a monster we make an image view
-    @IBOutlet weak var MonsterSprite: UIImageView!
+    // @IBOutlet weak var MonsterSprite: UIImageView!
     
     
     override func viewDidLoad() {
@@ -34,8 +35,9 @@ class MonsterViewController: UIViewController, ASAdViewDelegate {
         // Load a banner
         load_banner();
         
-        // MONSTER roar on init
-        monster.roar();
+        // MONSTER init
+        monster.spawn(view: self.view);
+        monster2.spawn(view: self.view);
         
         // Set up our game loop
         let displaylink = CADisplayLink(target: self, selector: #selector(step))
@@ -52,9 +54,10 @@ class MonsterViewController: UIViewController, ASAdViewDelegate {
     
     // Recenter the sprite when a tap is heard in case our monster escapes
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        print("Hello World")
         monster.roar();
-        monster.setPosition(x: (self.view.frame.width - MonsterSprite.frame.width)/2, y: (self.view.frame.height - MonsterSprite.frame.height)/2)
+        monster.resetPosition(view: self.view);
+        monster2.resetPosition(view: self.view);
+
     }
     
     // Called by the game loop update
@@ -63,11 +66,7 @@ class MonsterViewController: UIViewController, ASAdViewDelegate {
         
         // Update will select a random direction
         monster.update(deltaTime: 1.0);
-        
-        // Draw the updated location of the monster TODO: IMPROVE THIS AND REFACTOR THIS INTO A CLASS FUNCTION
-        MonsterSprite.frame.origin.x = monster.getPosX();
-        MonsterSprite.frame.origin.y = monster.getPosY();
-
+        monster2.update(deltaTime: 1.0);
         
     }
 

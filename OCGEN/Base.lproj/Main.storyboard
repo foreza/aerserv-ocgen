@@ -21,18 +21,9 @@
                     <view key="view" contentMode="scaleToFill" id="muD-bf-IDa">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="chibi-swordman" translatesAutoresizingMaskIntoConstraints="NO" id="28Z-24-gPn">
-                                <rect key="frame" x="218" y="250" width="332" height="309"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="cH4-tf-5Wy"/>
-                    <connections>
-                        <outlet property="MonsterSprite" destination="28Z-24-gPn" id="Aus-P9-rgU"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="snk-Nn-JAI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
