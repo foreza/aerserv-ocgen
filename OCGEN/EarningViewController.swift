@@ -161,35 +161,6 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     func interstitialViewControllerDidDisappear(_ viewController: ASInterstitialViewController!) {
         print("[DEBUG] @--- Interstitial ad did disappear ---@")
     }
-    
-
-    
-    // Experimental Area
-    
-    var secondaryInterstitialPlacementID = "380004"
-    var secondaryInterstitial: ASInterstitialViewController?
-
-    
-    // PII-509
-    func startSomethingWithDelayOnMain() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) { // 2
-            print("[DEBUG] Main - startSomethingWithDelayOnMain: ", self.secondaryInterstitialPlacementID)
-            self.preload_secondary_interstitial(plc: self.secondaryInterstitialPlacementID)
-        }
-    }
-    
-    // PII-509 - Called by async to pre-load the interstitial
-    func preload_secondary_interstitial(plc : String) {
-        print("[DEBUG] - BEGIN preload_secondary_interstitial")
-        
-        secondaryInterstitial = ASInterstitialViewController(forPlacementID: plc, with:self)
-        secondaryInterstitial?.keyWords = ["Aer", "Serv"]
-        secondaryInterstitial?.locationServicesEnabled = true
-        secondaryInterstitial?.userId = "AerServUser"
-        secondaryInterstitial?.isPreload = true
-        secondaryInterstitial?.loadAd()
-    }
-    
 
 }
 

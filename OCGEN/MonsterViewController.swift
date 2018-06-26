@@ -11,11 +11,18 @@ import AerServSDK
 import QuartzCore       // Required for CADisplayLink
 
 
-class MonsterViewController: UIViewController, ASAdViewDelegate {
+class MonsterViewController: UIViewController, ASAdViewDelegate, ASInterstitialViewControllerDelegate {
     
     // Banner and interstitial objects
-    var bannerPlacementID = "1028254" // PII-523 Placement
-    var banner: ASAdView?
+    var interstitialPlacementID = "380000";             // PII-523 Placement
+    var bannerPlacementID = "1028254";                   // PII-523 Placement
+    var interstitial: ASInterstitialViewController?;
+    var banner: ASAdView?;
+    
+    // State Control and other vars
+    var preloadReady = false;
+    
+
     
     // Instance of CADisplayLink to let us draw
     var displayLink : CADisplayLink?
@@ -23,21 +30,14 @@ class MonsterViewController: UIViewController, ASAdViewDelegate {
     // Monsters!
     var monster = Monster(posX: 50.0, posY: 100.0, moveDistance: 2.0, name: "HamString", type: "shark", displayImageWidth: 100, displayImageHeight: 100);
     var monster2 = Monster(posX: 70.0, posY: 300.0, moveDistance: 1.0, name: "Finn", type: "sword", displayImageWidth: 50, displayImageHeight: 50);
-
-    
-    // Todo: Couple this instead with the Monster.swift class so when we make a monster we make an image view
-    // @IBOutlet weak var MonsterSprite: UIImageView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Load a banner
-        load_banner();
-        
         // MONSTER init
-        monster.spawn(view: self.view);
-        monster2.spawn(view: self.view);
+         monster.spawn(view: self.view);
+         monster2.spawn(view: self.view);
         
         // Set up our game loop
         let displaylink = CADisplayLink(target: self, selector: #selector(step))
@@ -46,10 +46,27 @@ class MonsterViewController: UIViewController, ASAdViewDelegate {
         // Set up our gesture recognizers
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
-
+        
+        
+        // Show an interstitial
+        interstitial = ASInterstitialViewController(forPlacementID: interstitialPlacementID, with:self)
+        interstitial?.keyWords = ["Aer", "Serv"]
+        interstitial?.locationServicesEnabled = true
+        interstitial?.userId = "AerServUser"
+        interstitial?.loadAd()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        // Load a banner
+        load_banner();
+    }
+
     
+    
+    // On ad loaded (not used)
+    func interstitialViewControllerAdLoadedSuccessfully(_ viewController: ASInterstitialViewController!) {
+        interstitial?.show(from: self)
+    }
     
     
     // Recenter the sprite when a tap is heard in case our monster escapes
