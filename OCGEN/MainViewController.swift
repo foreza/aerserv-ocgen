@@ -18,7 +18,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     
     // State Control and other vars
     var isReady = false
-    var bannerPlacementID = "380000"
+    var bannerPlacementID = "380003" // PII-523 Placement
     
     // Banner and interstitial objects
     var banner: ASAdView?
@@ -31,6 +31,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     @IBOutlet weak var generateOCButton: UIButton!
     @IBOutlet weak var resultOCText: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+
     
     // MARK: - CORE - Core application function
     
@@ -68,6 +69,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     
     
     // MARK: - VIEW - View controller functions
+
     
     @IBAction func editGDPR(_ sender: Any) {
         gd.setEditMode(toSet: true)
@@ -88,9 +90,9 @@ class MainViewController: UIViewController, ASAdViewDelegate {
         // Load the banner
         load_banner()
         
+  
     }
     
-
     
     // Every time the view appears, do the following:
     override func viewWillAppear(_ animated: Bool) {
@@ -257,6 +259,8 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     func didDismissModalView(forAd adView: ASAdView!) {
         //print("[DEBUG] @--- Banner ad did dismissed modal ---@")
     }
+    
+    
 
 
 }
