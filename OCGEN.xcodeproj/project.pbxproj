@@ -12,6 +12,7 @@
 		92AEBDAA20B7652C00854CDB /* GDPRSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEBDA920B7652C00854CDB /* GDPRSingleton.swift */; };
 		92DAD49D20B37C1A00E2678B /* VCSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DAD49C20B37C1A00E2678B /* VCSingleton.swift */; };
 		92DEB3C020F7C32D001BBC50 /* AerServSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DEB3BF20F7C32D001BBC50 /* AerServSDK.framework */; };
+		92DEB3C420F7C89F001BBC50 /* DTBiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DEB3C320F7C89F001BBC50 /* DTBiOSSDK.framework */; };
 		9A0768A120AE45FC003DBCE4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */; };
 		9A393E6920AE347700685EC1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6820AE347700685EC1 /* WebKit.framework */; };
 		9A393E6B20AE348500685EC1 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6A20AE348500685EC1 /* libxml2.2.tbd */; };
@@ -29,6 +30,7 @@
 		92AEBDA920B7652C00854CDB /* GDPRSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDPRSingleton.swift; sourceTree = "<group>"; };
 		92DAD49C20B37C1A00E2678B /* VCSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSingleton.swift; sourceTree = "<group>"; };
 		92DEB3BF20F7C32D001BBC50 /* AerServSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AerServSDK.framework; sourceTree = "<group>"; };
+		92DEB3C320F7C89F001BBC50 /* DTBiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DTBiOSSDK.framework; sourceTree = "<group>"; };
 		9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9A393E6820AE347700685EC1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9A393E6A20AE348500685EC1 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
@@ -48,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92DEB3C420F7C89F001BBC50 /* DTBiOSSDK.framework in Frameworks */,
 				9A393E6B20AE348500685EC1 /* libxml2.2.tbd in Frameworks */,
 				92DEB3C020F7C32D001BBC50 /* AerServSDK.framework in Frameworks */,
 				9A393E6920AE347700685EC1 /* WebKit.framework in Frameworks */,
@@ -60,6 +63,7 @@
 		9A393E6520AE346D00685EC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				92DEB3C320F7C89F001BBC50 /* DTBiOSSDK.framework */,
 				92DEB3BF20F7C32D001BBC50 /* AerServSDK.framework */,
 				9A393E6A20AE348500685EC1 /* libxml2.2.tbd */,
 				9A393E6820AE347700685EC1 /* WebKit.framework */,

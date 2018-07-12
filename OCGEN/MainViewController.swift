@@ -8,9 +8,11 @@
 
 import UIKit
 import AerServSDK
+import DTBiOSSDK        // A9 is slightly different for mediation
 
 
-class MainViewController: UIViewController, ASAdViewDelegate {
+
+class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
    
     // Get a copy of the VC instance
     var vc = VCInstance.sharedInstance
@@ -18,7 +20,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     
     // State Control and other vars
     var isReady = false
-    var bannerPlacementID = "380000"
+    var bannerPlacementID = "380885"
     
     // Banner and interstitial objects
     var banner: ASAdView?
@@ -31,6 +33,15 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     @IBOutlet weak var generateOCButton: UIButton!
     @IBOutlet weak var resultOCText: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
+
+    
+    // A9 Specific:
+    var isA9Placement = false           // Use this to drive the logic of showing the ad
+    var kA9Banner320X50SlotId = "5ab6a4ae-4aa5-43f4-9da4-e30755f2b295"
+    var a9BannerResponse: DTBAdResponse?
+    var a9BannerAdSize: DTBAdSize?
+    var a9BannerLoaded: Bool?
     
     // MARK: - CORE - Core application function
     
@@ -80,6 +91,14 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Prepare A9 banner response
+        self.isA9Placement = false;
+        self.a9BannerLoaded = false;
+        self.a9BannerResponse = nil;
+        self.a9BannerAdSize = DTBAdSize.init(bannerAdSizeWithWidth: 320, height: 50, andSlotUUID: kA9Banner320X50SlotId)
+        print ("[DEBUG] viewDidLoad - a9BannerAdSize allocat 320x50")
+
+        
         // Set the UI text elements for this view
         version?.text = util_createSDKVersionDisplayText()
         gdpr?.text = util_createGDPRDisplayText()
@@ -103,13 +122,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     // Every time the view disappears, do the following:
     override func viewDidDisappear(_ animated: Bool) { }
     
-    
     override func viewDidLayoutSubviews() {
-        
-        // hiding version label in landscape
-//        version?.isHidden = !UIDeviceOrientationIsPortrait(UIDevice.current.orientation)
-        
-        // position banner at the bottome of screen for both portrait & landscape
         
         let navigationBarHeight: CGFloat = self.tabBarController!.tabBar.frame.height
         
@@ -124,7 +137,8 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     
     // Loads the banner
     func load_banner() {
-        
+    
+ 
         // If the banner is already existing, kill it
         if(banner != nil) {
             self.banner?.cancel()
@@ -139,19 +153,61 @@ class MainViewController: UIViewController, ASAdViewDelegate {
         let viewHeight:CGFloat = view.frame.size.height
         let xPos:CGFloat = (viewWidth - (ASBannerSize.width))/2
         let yPos:CGFloat = viewHeight - (ASBannerSize.height)
-        banner?.frame = CGRect.init(x: xPos, y: yPos, width: CGFloat(ASBannerSize.width), height: CGFloat(ASBannerSize.height))
-        banner?.delegate = self
-        banner?.sizeAdToFit = true;
-        banner?.locationServicesEnabled = true
-        banner?.keyWords = ["Aer", "Serv"]
-        banner?.sizeAdToFit = true;
         
-        //print("[DEBUG] load_banner - xPos is \(xPos) and yPos is \(yPos) for the display")
         
-        // Add to the subview, unwrap, and then load
-        view.addSubview(banner!)
-        banner?.loadAd()
+        // If this is not an A9 placement, do the normal thing.
+        if (!isA9Placement) {
+            banner?.frame = CGRect.init(x: xPos, y: yPos, width: CGFloat(ASBannerSize.width), height: CGFloat(ASBannerSize.height))
+            banner?.isPreload = true
+            banner?.delegate = self
+            banner?.sizeAdToFit = true
+            banner?.locationServicesEnabled = true
+            
+            // Add to the subview, unwrap, and then load
+            view.addSubview(banner!)
+            banner?.loadAd()
+        }
         
+        // If the A9 banner has not yet been loaded, prepare it for loading in case we get one.
+        if (a9BannerLoaded! == false){
+            
+            // have an array to store the DTBAdResponses from the DTB A9 delegate callback
+            banner?.dtbAdResponses = [a9BannerResponse, a9BannerResponse]
+            print("[DEBUG - DTBAdCallback] @--- banner?.dtbAdResponses ---@")
+            
+            var bannerSize = DTBAdSize(bannerAdSizeWithWidth: 320, height: 50, andSlotUUID: kA9Banner320X50SlotId)
+            var bannerSizes = [Any]()
+            bannerSizes.append(bannerSize ?? nil)
+            
+            let adLoader = DTBAdLoader()
+            adLoader.setAdSizes(bannerSizes)
+            adLoader.loadAd(self);          // Load A9
+            
+            print("[DEBUG - DTBAdCallback] adLoader loadAd ")
+        }
+        
+        // if this is the second time we are load_banner because of a9's delegate
+        if (isA9Placement && a9BannerResponse! != nil) {
+            print("[DEBUG - DTBAdCallback] damn straight, let's load this thing")
+            self.a9BannerLoaded = false;
+            
+            // have an array to store the DTBAdResponses from the DTB A9 delegate callback
+            banner?.dtbAdResponses = [a9BannerResponse, a9BannerResponse]
+            banner?.frame = CGRect.init(x: xPos, y: yPos, width: CGFloat(ASBannerSize.width), height: CGFloat(ASBannerSize.height))
+            banner?.delegate = self
+            
+            // Add to the subview, unwrap, and then load
+            view.addSubview(banner!)
+            banner?.loadAd()
+            
+            print("[DEBUG - DTBAdCallback] attempted load. do we see anything?")
+
+            
+        }
+        
+        
+       
+
     }
     
     // Dispose of any resources that can be recreated
@@ -196,27 +252,27 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     // In use: when the ad is preloaded - set isReady to true to disable any 'loading' behavior / show the ad.
     func adViewDidPreloadAd(_ adView: ASAdView!) {
         isReady = true
-        //print("[DEBUG] @--- Banner ad is preloaded ---@")
+        print("[DEBUG] @--- Banner ad is preloaded ---@")
     }
     
     // Not used: when the ad is loaded (not preloaded)
     func adViewDidLoadAd(_ adView: ASAdView!) {
-        //print("[DEBUG] @--- Banner ad was loaded ---@")
+        print("[DEBUG] @--- Banner ad was loaded ---@")
     }
     
     // Not used:
     func willPresentModalView(forAd adView: ASAdView!) {
-        //print("[DEBUG] @--- Banner will presented modal ---@")
+        print("[DEBUG] @--- Banner will presented modal ---@")
     }
     
     // Not used: when the ad is clicked, register some behavior
     func adWasClicked(_ adView: ASAdView!) {
-        //print("[DEBUG] @--- Banner ad was clicked ---@")
+        print("[DEBUG] @--- Banner ad was clicked ---@")
     }
     
     // Not used: when the ad fails to load / preload, register some behavior
     func adViewDidFail(toLoadAd adView: ASAdView!, withError error: Error!) {
-        //print("[DEBUG] @--- Banner ad failed: ", error, " ---@")
+        print("[DEBUG] @--- Banner ad failed: ", error, " ---@")
     }
     
     // Not used:
@@ -244,6 +300,40 @@ class MainViewController: UIViewController, ASAdViewDelegate {
         //print("[DEBUG] @--- Banner ad did dismissed modal ---@")
     }
 
+    // MARK: - A9 CALLBACKS - DTBAdCallback
+    
+    func onFailure(_ error: DTBAdError) {
+        print("[DEBUG - DTBAdCallback] onFailure")
+        self.a9BannerResponse = nil;
+        self.a9BannerLoaded = false;
+    }
+    
+    func onSuccess(_ adResponse: DTBAdResponse!) {
+        print("[DEBUG - DTBAdCallback] onSuccess")
+        
+        if(adResponse.adSizes() != nil && adResponse.adSizes().count > 0) {
+            
+            let responseSize:Any? = (adResponse.adSizes())[0]
+            if let size = responseSize {
+                var adResponseSize = size as! DTBAdSize
+                
+                // Match up the slot UUID
+                if(adResponseSize.slotUUID == self.a9BannerAdSize?.slotUUID){
+                    print("[DEBUG - DTBAdCallback] match: " + adResponseSize.slotUUID)
+                    self.a9BannerResponse = adResponse
+                    self.a9BannerLoaded = true
+                    
+                    print("[DEBUG - DTBAdCallback] calling load banner again!")
+                    isA9Placement = true        // set this to true so that we properly try to load the banner
+                    load_banner()
+                }
+
+            }
+
+        
+        }
+        
+    }
 
 }
 

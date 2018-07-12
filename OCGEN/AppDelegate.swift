@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import DTBiOSSDK
+
+
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,7 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Show log
         AerServSDK.showLogs(true)
+        
+        
+        // Instantiate DTBAds (A9) and set to test mode
+        DTBAds.sharedInstance().setAppKey("a9_onboarding_app_id")
+        DTBAds.sharedInstance().testMode = true
+        
+        
         return true
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
