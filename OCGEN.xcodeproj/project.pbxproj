@@ -11,10 +11,10 @@
 		923E78F620B7432B00410E37 /* GDPRPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E78F520B7432B00410E37 /* GDPRPopover.swift */; };
 		92AEBDAA20B7652C00854CDB /* GDPRSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEBDA920B7652C00854CDB /* GDPRSingleton.swift */; };
 		92DAD49D20B37C1A00E2678B /* VCSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DAD49C20B37C1A00E2678B /* VCSingleton.swift */; };
+		92DEB3C020F7C32D001BBC50 /* AerServSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DEB3BF20F7C32D001BBC50 /* AerServSDK.framework */; };
 		9A0768A120AE45FC003DBCE4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */; };
 		9A393E6920AE347700685EC1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6820AE347700685EC1 /* WebKit.framework */; };
 		9A393E6B20AE348500685EC1 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6A20AE348500685EC1 /* libxml2.2.tbd */; };
-		9AAE76B620AE47400052B2AB /* AerServSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE76B520AE47400052B2AB /* AerServSDK.framework */; };
 		9AAE76B720AE47F50052B2AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AEB795320AE2D54004C9D5F /* LaunchScreen.storyboard */; };
 		9AEB794920AE2D52004C9D5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEB794820AE2D52004C9D5F /* AppDelegate.swift */; };
 		9AEB794B20AE2D52004C9D5F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEB794A20AE2D52004C9D5F /* MainViewController.swift */; };
@@ -28,11 +28,11 @@
 		923E78F520B7432B00410E37 /* GDPRPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDPRPopover.swift; sourceTree = "<group>"; };
 		92AEBDA920B7652C00854CDB /* GDPRSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDPRSingleton.swift; sourceTree = "<group>"; };
 		92DAD49C20B37C1A00E2678B /* VCSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSingleton.swift; sourceTree = "<group>"; };
+		92DEB3BF20F7C32D001BBC50 /* AerServSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AerServSDK.framework; sourceTree = "<group>"; };
 		9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9A393E6820AE347700685EC1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9A393E6A20AE348500685EC1 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		9A393E7020AE430200685EC1 /* AerServSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AerServSDK-Bridging-Header.h"; path = "OCGEN/AerServSDK-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		9AAE76B520AE47400052B2AB /* AerServSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AerServSDK.framework; path = OCGEN/AerServSDK.framework; sourceTree = "<group>"; };
 		9AEB794520AE2D52004C9D5F /* OCGEN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCGEN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AEB794820AE2D52004C9D5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AEB794A20AE2D52004C9D5F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -48,8 +48,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AAE76B620AE47400052B2AB /* AerServSDK.framework in Frameworks */,
 				9A393E6B20AE348500685EC1 /* libxml2.2.tbd in Frameworks */,
+				92DEB3C020F7C32D001BBC50 /* AerServSDK.framework in Frameworks */,
 				9A393E6920AE347700685EC1 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,7 +60,7 @@
 		9A393E6520AE346D00685EC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9AAE76B520AE47400052B2AB /* AerServSDK.framework */,
+				92DEB3BF20F7C32D001BBC50 /* AerServSDK.framework */,
 				9A393E6A20AE348500685EC1 /* libxml2.2.tbd */,
 				9A393E6820AE347700685EC1 /* WebKit.framework */,
 			);
@@ -329,7 +329,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L36D2F8J6M;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/OCGEN";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/OCGEN",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = OCGEN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -357,7 +360,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L36D2F8J6M;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/OCGEN";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/OCGEN",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = OCGEN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
