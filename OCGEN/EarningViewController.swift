@@ -16,6 +16,7 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     
     // State Control and other vars
     var interstitialPlacementID = "380315"
+    var isPreloading = false
     var preloadReady = false
     
     // Banner and interstitial objects
@@ -49,11 +50,7 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
         if (!preloadReady) {
             // Preload the interstitial
             preload_interstitial(plc: interstitialPlacementID)
-            
-            // preload_secondary_interstitial(plc: secondaryInterstitialPlacementID)
-            // startSomethingWithDelayOnMain()
-
-            
+        
             // Set all view elements
             showInterstitial?.isHidden = true;
             adLoadSpinner?.isHidden = false;
@@ -74,14 +71,19 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     // Called by the initial and the viewWillAppear to pre-load the interstitial
     func preload_interstitial(plc : String) {
         
-        print("[DEBUG] - BEGIN preload_interstitial")
+        if (!isPreloading){
+            isPreloading = true
+            print("[DEBUG] - BEGIN preload_interstitial")
+            interstitial = ASInterstitialViewController(forPlacementID: plc, with:self)
+            interstitial?.keyWords = ["Aer", "Serv"]
+            interstitial?.locationServicesEnabled = true
+            interstitial?.userId = "AerServUser"
+            interstitial?.isPreload = true
+            interstitial?.loadAd()
+        }
         
-        interstitial = ASInterstitialViewController(forPlacementID: plc, with:self)
-        interstitial?.keyWords = ["Aer", "Serv"]
-        interstitial?.locationServicesEnabled = true
-        interstitial?.userId = "AerServUser"
-        interstitial?.isPreload = true
-        interstitial?.loadAd()
+        print("[DEBUG] - already preloading_interstitial")
+ 
     }
     
     // Button to show the interstitial
@@ -112,10 +114,12 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     // On Ad preloaded
     func interstitialViewControllerDidPreloadAd(_ viewController: ASInterstitialViewController!) {
         print("[DEBUG] @--- [PRELOAD] Interstitial ad preload ready ---@");
+        preloadReady = true
+        isPreloading = false
         showInterstitial?.isHidden = false
         adLoadSpinner.stopAnimating()
         adLoadSpinner.isHidden = true
-        preloadReady = true
+
     }
     
     // On ad loaded (not used)
