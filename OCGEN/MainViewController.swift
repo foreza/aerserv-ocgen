@@ -19,13 +19,14 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
     var gd = GDPRInstance.sharedInstance
     
     // State Control and other vars
-    var isReady = false
+    var isReady = false                     // Variable that is toggled T/F based off of whether we preloaded a banner or not.
+    var supportA9 = true                    // Variable that controls whether this app makes the S2S connection to A9
     var bannerPlacementID = "380885"
     
     // Banner and interstitial objects
     var banner: ASAdView?
     
-    // Declare my view variables here
+    // IBOutlet variables here
     @IBOutlet weak var appTitle: UILabel!
     @IBOutlet weak var version: UILabel!
     @IBOutlet weak var gdpr: UILabel!
@@ -34,14 +35,13 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
     @IBOutlet weak var resultOCText: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-
-    
-    // A9 Specific:
-    var isA9Placement = false           // Use this to drive the logic of showing the ad
-    var kA9Banner320X50SlotId = "5ab6a4ae-4aa5-43f4-9da4-e30755f2b295"
+    // A9 Configurations:
     var a9BannerResponse: DTBAdResponse?
     var a9BannerAdSize: DTBAdSize?
-    var a9BannerLoaded: Bool?
+    
+    var a9BannerLoaded = false;
+    var kA9Banner320X50SlotId = "5ab6a4ae-4aa5-43f4-9da4-e30755f2b295"
+    
     
     // MARK: - CORE - Core application function
     
@@ -53,9 +53,7 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
         if (chargeVC()){
             self.resultOCText.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
             self.spinner.isHidden = true;
-            // print ("[DEBUG] generateOC - success!")
         } else {
-            // print ("[DEBUG] generateOC - insufficient funds")
         }
         
     }
@@ -91,25 +89,22 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Prepare A9 banner response
-        self.isA9Placement = false;
-        self.a9BannerLoaded = false;
-        self.a9BannerResponse = nil;
-        self.a9BannerAdSize = DTBAdSize.init(bannerAdSizeWithWidth: 320, height: 50, andSlotUUID: kA9Banner320X50SlotId)
-        print ("[DEBUG] viewDidLoad - a9BannerAdSize allocat 320x50")
-
-        
         // Set the UI text elements for this view
         version?.text = util_createSDKVersionDisplayText()
         gdpr?.text = util_createGDPRDisplayText()
         energyVC?.text = util_createEnergyDisplayText();
         
-        // Load the banner
-        load_banner()
+        
+        // if A9 mediation is supported, load A9 first so it can participate in the auction afterwards
+        if (supportA9) {
+            load_banner_a9()
+        }
+        // Otherwise, just load the banner as we do normally
+        else {
+            load_banner()
+        }
         
     }
-    
-
     
     // Every time the view appears, do the following:
     override func viewWillAppear(_ animated: Bool) {
@@ -121,6 +116,7 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
     
     // Every time the view disappears, do the following:
     override func viewDidDisappear(_ animated: Bool) { }
+    
     
     override func viewDidLayoutSubviews() {
         
@@ -135,18 +131,41 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
         }
     }
     
+    // Call this function to load an A9 banner.
+    func load_banner_a9() {
+        
+        // Prepare A9 banner response
+        a9BannerLoaded = false;                        // Set the a9BannerLoaded to false when viewDidLoad. When we get the delegate callback from A9, we will then set this to true.
+        a9BannerResponse = nil;                        // Clear out the last response. TODO: Need to make a new a9Response when the previous banner is 'refreshed'
+        a9BannerAdSize = DTBAdSize.init(bannerAdSizeWithWidth: 320,
+                                             height: 50,
+                                             andSlotUUID: kA9Banner320X50SlotId)
+        
+        var bannerSizes = [DTBAdSize]()
+        bannerSizes.append(DTBAdSize(bannerAdSizeWithWidth: 320, height: 50, andSlotUUID: kA9Banner320X50SlotId))
+        
+        let adLoader = DTBAdLoader()
+        adLoader.setAdSizes(bannerSizes)
+        adLoader.loadAd(self);
+        
+        print ("[DEBUG] viewDidLoad - DTBAdSize a9BannerAdSize bannerAdSizeWithWidth/height/andSlotUUID")
+        
+    }
+
+    
     // Loads the banner
     func load_banner() {
-    
- 
+        
+        print("[DEBUG] load_banner called --------")
+
         // If the banner is already existing, kill it
         if(banner != nil) {
-            self.banner?.cancel()
+            banner?.cancel()
             banner?.removeFromSuperview()
             banner = nil
         }
 
-        // Configure the banner here
+        // Configure banner here
         banner = ASAdView(placementID: bannerPlacementID, andAdSize: ASBannerSize)
         
         let viewWidth:CGFloat = view.frame.size.width
@@ -155,8 +174,8 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
         let yPos:CGFloat = viewHeight - (ASBannerSize.height)
         
         
-        // If this is not an A9 placement, do the normal thing.
-        if (!isA9Placement) {
+        // Ensure that this is not an A9 placement
+        if (!a9BannerLoaded) {
             banner?.frame = CGRect.init(x: xPos, y: yPos, width: CGFloat(ASBannerSize.width), height: CGFloat(ASBannerSize.height))
             banner?.isPreload = true
             banner?.delegate = self
@@ -169,52 +188,28 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
         }
         
         // If the A9 banner has not yet been loaded, prepare it for loading in case we get one.
-        if (a9BannerLoaded! == false){
-            
-            // have an array to store the DTBAdResponses from the DTB A9 delegate callback
-            banner?.dtbAdResponses = [a9BannerResponse, a9BannerResponse]
-            print("[DEBUG - DTBAdCallback] @--- banner?.dtbAdResponses ---@")
-            
-            var bannerSize = DTBAdSize(bannerAdSizeWithWidth: 320, height: 50, andSlotUUID: kA9Banner320X50SlotId)
-            var bannerSizes = [Any]()
-            bannerSizes.append(bannerSize ?? nil)
-            
-            let adLoader = DTBAdLoader()
-            adLoader.setAdSizes(bannerSizes)
-            adLoader.loadAd(self);          // Load A9
-            
-            print("[DEBUG - DTBAdCallback] adLoader loadAd ")
-        }
-        
-        // if this is the second time we are load_banner because of a9's delegate
-        if (isA9Placement && a9BannerResponse! != nil) {
-            print("[DEBUG - DTBAdCallback] damn straight, let's load this thing")
-            self.a9BannerLoaded = false;
-            
-            // have an array to store the DTBAdResponses from the DTB A9 delegate callback
-            banner?.dtbAdResponses = [a9BannerResponse, a9BannerResponse]
-            banner?.frame = CGRect.init(x: xPos, y: yPos, width: CGFloat(ASBannerSize.width), height: CGFloat(ASBannerSize.height))
-            banner?.delegate = self
-            
-            // Add to the subview, unwrap, and then load
-            view.addSubview(banner!)
-            banner?.loadAd()
-            
-            print("[DEBUG - DTBAdCallback] attempted load. do we see anything?")
-
-            
-        }
-        
-        
-       
-
+        if (a9BannerLoaded && a9BannerResponse != nil) {
+            print("[DEBUG] load_banner hasResponse a9BannerResponse")
+                a9BannerLoaded = false;
+                
+                // Create an array to store the DTBAdResponses from the DTB A9 delegate callback
+                banner?.dtbAdResponses = [a9BannerResponse as Any, a9BannerResponse as Any]
+                banner?.frame = CGRect.init(x: xPos, y: yPos, width: CGFloat(ASBannerSize.width), height: CGFloat(ASBannerSize.height))
+                banner?.delegate = self
+                
+                // Add to the subview, unwrap, and then load.
+                if let banner = banner {
+                    view.addSubview(banner)
+                    banner.loadAd()
+                    print("[DEBUG] load_banner attempted a9BannerLoaded")
+                }
+            }
     }
     
     // Dispose of any resources that can be recreated
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
     
     
     
@@ -243,8 +238,6 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
     func util_createSDKVersionDisplayText() -> String {
         return String("SDK Version: " + AerServSDK.sdkVersion())
     }
-    
-    
     
     
     // MARK: - CALLBACKS - Callback functions we are subscribed to
@@ -302,33 +295,30 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
 
     // MARK: - A9 CALLBACKS - DTBAdCallback
     
+    
+    // On A9 fail:
     func onFailure(_ error: DTBAdError) {
-        print("[DEBUG - DTBAdCallback] onFailure")
-        self.a9BannerResponse = nil;
-        self.a9BannerLoaded = false;
+        print("[DEBUG] DTBAdCallback onFailure")
+        a9BannerResponse = nil;         // Ensure the response is still set to nil
+        a9BannerLoaded = false;         // Ensure that a9BannerLoader is set to false so we do not try to run the a9 logic in the show
     }
     
+    // On A9 success:
     func onSuccess(_ adResponse: DTBAdResponse!) {
-        print("[DEBUG - DTBAdCallback] onSuccess")
+        print("[DEBUG] DTBAdCallback onSuccess")
         
         if(adResponse.adSizes() != nil && adResponse.adSizes().count > 0) {
+
+            let adResponseSize = (adResponse.adSizes())[0] as! DTBAdSize
             
-            let responseSize:Any? = (adResponse.adSizes())[0]
-            if let size = responseSize {
-                var adResponseSize = size as! DTBAdSize
-                
                 // Match up the slot UUID
                 if(adResponseSize.slotUUID == self.a9BannerAdSize?.slotUUID){
-                    print("[DEBUG - DTBAdCallback] match: " + adResponseSize.slotUUID)
-                    self.a9BannerResponse = adResponse
-                    self.a9BannerLoaded = true
+                    a9BannerResponse = adResponse
+                    a9BannerLoaded = true
                     
-                    print("[DEBUG - DTBAdCallback] calling load banner again!")
-                    isA9Placement = true        // set this to true so that we properly try to load the banner
-                    load_banner()
+                    print("[DEBUG - DTBAdCallback] calling load banner!")
+                    load_banner()               // now call the proper load banner function, which will pipe to the condition set by a9BannerLoaded
                 }
-
-            }
 
         
         }
