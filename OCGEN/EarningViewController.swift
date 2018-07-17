@@ -8,14 +8,18 @@
 
 import UIKit
 import AerServSDK
+import DTBiOSSDK        // A9 is slightly different for mediation
 
-class EarningViewController: UIViewController, ASInterstitialViewControllerDelegate {
+
+class EarningViewController: UIViewController, ASInterstitialViewControllerDelegate, DTBAdCallback {
+
     
     // Get a singleton VC instance
     var vc = VCInstance.sharedInstance
     
     // State Control and other vars
-    var interstitialPlacementID = "380315"
+    var interstitialPlacementID = "380889"
+    var supportA9 = true                    // Variable that controls whether this app makes the S2S connection to A9
     var isPreloading = false
     var preloadReady = false
     
@@ -26,6 +30,13 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     @IBOutlet weak var earnEnergyVC: UILabel!
     @IBOutlet weak var showInterstitial: UIButton!
     @IBOutlet weak var adLoadSpinner: UIActivityIndicatorView!
+    
+    // A9 Configurations:
+    var a9InterstitialResponse: DTBAdResponse?
+    var a9InterstitialAdSize: DTBAdSize?
+    
+    var a9InterstitialLoaded = false;
+    var kA9InterstitialSlotId = "4e918ac0-5c68-4fe1-8d26-4e76e8f74831"
     
     
     // MARK: - VIEW - View controller functions
@@ -48,9 +59,17 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     override func viewWillAppear(_ animated: Bool) {
         
         if (!preloadReady) {
-            // Preload the interstitial
-            preload_interstitial(plc: interstitialPlacementID)
-        
+    
+            // if A9 mediation is supported, load A9 first so it can participate in the auction afterwards
+            if (supportA9) {
+                load_interstitial_a9()
+            }
+                // Otherwise, just load the banner as we do normally
+            else {
+                // Preload the interstitial
+                preload_interstitial(plc: interstitialPlacementID)
+            }
+            
             // Set all view elements
             showInterstitial?.isHidden = true;
             adLoadSpinner?.isHidden = false;
@@ -67,27 +86,67 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     }
     
     
+    func load_interstitial_a9(){
+        
+        // Prepare A9 banner response
+        a9InterstitialLoaded = false;                        // Set the a9BannerLoaded to false when viewDidLoad. When we get the delegate callback from A9, we will then set this to true.
+        a9InterstitialResponse = nil;                        // Clear out the last response. TODO: Need to make a new a9Response when the previous banner is 'refreshed'
+        
+        var interstitialSize = [DTBAdSize]()
+        interstitialSize.append(DTBAdSize(interstitialAdSizeWithSlotUUID: kA9InterstitialSlotId))
+        
+        let adLoader = DTBAdLoader()
+        adLoader.setAdSizes(interstitialSize)
+        adLoader.loadAd(self);
+        
+        print ("[DEBUG] viewDidLoad - DTBAdSize interstitialSize")
+        
+    }
     
     // Called by the initial and the viewWillAppear to pre-load the interstitial
     func preload_interstitial(plc : String) {
         
-        if (!isPreloading){
+        if (!a9InterstitialLoaded && !isPreloading){
             isPreloading = true
             print("[DEBUG] - BEGIN preload_interstitial")
             interstitial = ASInterstitialViewController(forPlacementID: plc, with:self)
-            interstitial?.keyWords = ["Aer", "Serv"]
             interstitial?.locationServicesEnabled = true
             interstitial?.userId = "AerServUser"
             interstitial?.isPreload = true
             interstitial?.loadAd()
         }
+            
+        if (a9InterstitialLoaded && a9InterstitialResponse != nil) {
+            
+            isPreloading = true
+            
+            interstitial = ASInterstitialViewController(forPlacementID: plc, with:self)
+            interstitial?.locationServicesEnabled = true
+            interstitial?.userId = "AerServUser"
+
+            print("[DEBUG] preload_interstitial hasResponse a9InterstitialResponse")
+            a9InterstitialLoaded = false;
+            // Create an array to store the DTBAdResponses from the DTB A9 delegate callback
+            interstitial?.dtbAdResponses = [a9InterstitialResponse as Any, a9InterstitialResponse as Any]
+            interstitial?.delegate = self
+            interstitial?.isPreload = true
+            interstitial?.loadAd()
+            
+            print("[DEBUG] preload_interstitial is ready, a9InterstitialLoaded")
+        }
+            
+            
+            
+        else {
+        print("[DEBUG] - preloading_interstitial")
+        }
         
-        print("[DEBUG] - already preloading_interstitial")
  
     }
     
     // Button to show the interstitial
     @IBAction func show_interstitial() {
+        
         interstitial?.show(from: self)
         preloadReady = false
     }
@@ -168,30 +227,42 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     
 
     
-    // Experimental Area
     
-    var secondaryInterstitialPlacementID = "380004"
-    var secondaryInterstitial: ASInterstitialViewController?
+    // MARK: - A9 CALLBACKS - DTBAdCallback
 
     
-    // PII-509
-    func startSomethingWithDelayOnMain() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) { // 2
-            print("[DEBUG] Main - startSomethingWithDelayOnMain: ", self.secondaryInterstitialPlacementID)
-            self.preload_secondary_interstitial(plc: self.secondaryInterstitialPlacementID)
-        }
+    func onFailure(_ error: DTBAdError) {
+        print("[DEBUG] DTBAdCallback onFailure")
+        a9InterstitialResponse = nil;         // Ensure the response is still set to nil
+        a9InterstitialLoaded = false;         // Ensure that a9BannerLoader is set to false so we do not try to run the a9 logic in the show
     }
     
-    // PII-509 - Called by async to pre-load the interstitial
-    func preload_secondary_interstitial(plc : String) {
-        print("[DEBUG] - BEGIN preload_secondary_interstitial")
+    func onSuccess(_ adResponse: DTBAdResponse!) {
+        print("[DEBUG] DTBAdCallback onSuccess")
         
-        secondaryInterstitial = ASInterstitialViewController(forPlacementID: plc, with:self)
-        secondaryInterstitial?.keyWords = ["Aer", "Serv"]
-        secondaryInterstitial?.locationServicesEnabled = true
-        secondaryInterstitial?.userId = "AerServUser"
-        secondaryInterstitial?.isPreload = true
-        secondaryInterstitial?.loadAd()
+        
+        if(adResponse.adSizes() != nil && adResponse.adSizes().count > 0) {
+            
+            let adResponseSize = (adResponse.adSizes())[0] as! DTBAdSize
+            a9InterstitialLoaded = true
+            a9InterstitialResponse = adResponse
+            print("[DEBUG - DTBAdCallback] calling preload_interstitial on interstitialPlacementID!")
+            preload_interstitial(plc: interstitialPlacementID)
+
+            
+            // Match up the slot UUID
+            if(adResponseSize.slotUUID == self.a9InterstitialAdSize?.slotUUID){
+                a9InterstitialLoaded = true
+                
+ 
+                
+            }
+        
+            
+        }
+        
+
+        
     }
     
 

@@ -20,8 +20,9 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
     
     // State Control and other vars
     var isReady = false                     // Variable that is toggled T/F based off of whether we preloaded a banner or not.
-    var supportA9 = true                    // Variable that controls whether this app makes the S2S connection to A9
-    var bannerPlacementID = "380885"
+    var supportA9 = false                    // Variable that controls whether this app makes the S2S connection to A9
+    var bannerPlacementID = "1040600"
+    var autoRefresh = true
     
     // Banner and interstitial objects
     var banner: ASAdView?
@@ -58,6 +59,22 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
         
     }
     
+    // Note: this may not work properly with a9
+    @IBAction func toggleBannerRefresh(_ sender: Any) {
+        
+        // if autorefresh is enabled, disable it
+        if (autoRefresh){
+            banner?.stopAutomaticallyRefreshingContents()
+            print ("[DEBUG] toggleBannerRefresh - stopAutomaticallyRefreshingContents")
+            autoRefresh = false;
+        } else {
+            // if it is disabled, enable it
+            banner?.startAutomaticallyRefreshingContents()
+            print ("[DEBUG] toggleBannerRefresh - startAutomaticallyRefreshingContents")
+            autoRefresh = true;
+        }
+        
+    }
     // This function is called to charge the user's VC account (pulled from storage)
     func chargeVC() -> Bool{
         
@@ -95,12 +112,14 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
         energyVC?.text = util_createEnergyDisplayText();
         
         
+        
         // if A9 mediation is supported, load A9 first so it can participate in the auction afterwards
         if (supportA9) {
-            load_banner_a9()
+             load_banner_a9()
         }
         // Otherwise, just load the banner as we do normally
         else {
+            autoRefresh = true
             load_banner()
         }
         
@@ -185,6 +204,7 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
             // Add to the subview, unwrap, and then load
             view.addSubview(banner!)
             banner?.loadAd()
+            banner?.startAutomaticallyRefreshingContents()
         }
         
         // If the A9 banner has not yet been loaded, prepare it for loading in case we get one.
@@ -222,7 +242,7 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
     
     
     
-    // MARK: - UTILS - Utility functions to control strings
+    // MARK: - UTILS - Utility functions to control stuff
     
     // Util for controlling the energy display text
     func util_createEnergyDisplayText() -> String {
@@ -245,6 +265,7 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
     // In use: when the ad is preloaded - set isReady to true to disable any 'loading' behavior / show the ad.
     func adViewDidPreloadAd(_ adView: ASAdView!) {
         isReady = true
+        banner?.showPreloadedBanner()
         print("[DEBUG] @--- Banner ad is preloaded ---@")
     }
     

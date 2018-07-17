@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9jP-48-H4T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9jP-48-H4T">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -139,11 +139,22 @@ SEL_GENDER aspires to RAND_ASPIRATION</string>
                                     <action selector="editGDPR:" destination="9pv-A4-QxB" eventType="touchUpInside" id="3ND-1q-l92"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GwI-Ii-MGR">
+                                <rect key="frame" x="70" y="829" width="628" height="34"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Toggle Banner Refresh">
+                                    <color key="titleColor" red="0.98823529409999999" green="1" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleBannerRefresh:" destination="9pv-A4-QxB" eventType="touchUpInside" id="8rB-4S-9F6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.9882352941176471" green="1" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="dTW-HE-3W2" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="50" id="YlO-BI-OKf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dTW-HE-3W2" secondAttribute="trailing" constant="50" id="Znk-0L-i56"/>
+                            <constraint firstItem="dTW-HE-3W2" firstAttribute="top" secondItem="GwI-Ii-MGR" secondAttribute="bottom" constant="23" id="mip-0u-zqM"/>
                             <constraint firstItem="n1t-kO-ZUY" firstAttribute="top" secondItem="dTW-HE-3W2" secondAttribute="bottom" constant="55" id="q4L-yb-JgJ"/>
                         </constraints>
                     </view>
