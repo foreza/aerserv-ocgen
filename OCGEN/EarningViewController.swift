@@ -15,7 +15,7 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     var vc = VCInstance.sharedInstance
     
     // State Control and other vars
-    var interstitialPlacementID = "380315"
+    var interstitialPlacementID = "1040446"
     var preloadReady = false
     
     // Banner and interstitial objects
@@ -77,11 +77,20 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
         print("[DEBUG] - BEGIN preload_interstitial")
         
         interstitial = ASInterstitialViewController(forPlacementID: plc, with:self)
-        interstitial?.keyWords = ["Aer", "Serv"]
+        interstitial?.pubKeys = configure_pubKey()
         interstitial?.locationServicesEnabled = true
         interstitial?.userId = "AerServUser"
         interstitial?.isPreload = true
         interstitial?.loadAd()
+    }
+    
+    // Configure pub keys for detailed reporting
+    func configure_pubKey() -> Dictionary<AnyHashable,Any>{
+        
+        var dict : Dictionary = Dictionary<AnyHashable,Any>()
+        dict["vartyr"] = "ocgen-inter"
+        return dict
+        
     }
     
     // Button to show the interstitial

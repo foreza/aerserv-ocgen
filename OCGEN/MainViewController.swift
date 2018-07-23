@@ -18,7 +18,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
     
     // State Control and other vars
     var isReady = false
-    var bannerPlacementID = "380000"
+    var bannerPlacementID = "1040446"
     
     // Banner and interstitial objects
     var banner: ASAdView?
@@ -143,7 +143,7 @@ class MainViewController: UIViewController, ASAdViewDelegate {
         banner?.delegate = self
         banner?.sizeAdToFit = true;
         banner?.locationServicesEnabled = true
-        banner?.keyWords = ["Aer", "Serv"]
+        banner?.pubKeys = configure_pubKey()
         banner?.sizeAdToFit = true;
         
         //print("[DEBUG] load_banner - xPos is \(xPos) and yPos is \(yPos) for the display")
@@ -153,6 +153,16 @@ class MainViewController: UIViewController, ASAdViewDelegate {
         banner?.loadAd()
         
     }
+    
+    // Configure pub keys for detailed reporting
+    func configure_pubKey() -> Dictionary<AnyHashable,Any>{
+        
+        var dict : Dictionary = Dictionary<AnyHashable,Any>()
+        dict["vartyr"] = "ocgen-testvalue"
+        return dict
+        
+    }
+    
     
     // Dispose of any resources that can be recreated
     override func didReceiveMemoryWarning() {
