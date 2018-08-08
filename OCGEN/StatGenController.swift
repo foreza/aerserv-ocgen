@@ -15,6 +15,11 @@ class StatGenController: UIViewController, ASAdViewDelegate {
     // Get a copy of the VC instance
     var vc = VCInstance.sharedInstance
     
+    var bannerPlacementID = "1041551"
+    
+    // Banner and interstitial objects
+    var banner: ASAdView?
+    
     // State Control and other vars
     var isReady = false
     
@@ -35,6 +40,8 @@ class StatGenController: UIViewController, ASAdViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        load_banner();
+        
         // Use rollValues to easily access the @IBOutlet values
         rollValues = [strValue, dexValue,conValue, intValue, wisValue, chrValue]
         
@@ -52,6 +59,27 @@ class StatGenController: UIViewController, ASAdViewDelegate {
     // Dependency of ASAdViewDelegate
     func viewControllerForPresentingModalView() -> UIViewController! {
         return self
+    }
+    
+    func load_banner(){
+        
+        banner = ASAdView(placementID: bannerPlacementID, andAdSize: ASMediumRectSize)
+        
+        let viewWidth:CGFloat = view.frame.size.width
+        let viewHeight:CGFloat = view.frame.size.height
+        let xPos:CGFloat = (viewWidth - (ASMediumRectSize.width))/2
+        let yPos:CGFloat = viewHeight - (ASMediumRectSize.height) - 130
+        banner?.frame = CGRect.init(x: xPos, y: yPos, width: CGFloat(ASMediumRectSize.width), height: CGFloat(ASMediumRectSize.height))
+        banner?.delegate = self
+        banner?.sizeAdToFit = true;
+        banner?.locationServicesEnabled = true
+        banner?.sizeAdToFit = true;
+        
+        //print("[DEBUG] load_banner - xPos is \(xPos) and yPos is \(yPos) for the display")
+        
+        // Add to the subview, unwrap, and then load
+        view.addSubview(banner!)
+        banner?.loadAd()
     }
     
     // MARK: - Stat Roll - Functions that will call other util / metric functions to provide stat rolls
