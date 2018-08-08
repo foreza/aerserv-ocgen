@@ -26,6 +26,7 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
     // Banner and interstitial objects
     var interstitial: ASInterstitialViewController?
 
+
     // Declare my view variables here
     @IBOutlet weak var earnEnergyVC: UILabel!
     @IBOutlet weak var showInterstitial: UIButton!
@@ -134,8 +135,6 @@ class EarningViewController: UIViewController, ASInterstitialViewControllerDeleg
             
             print("[DEBUG] preload_interstitial is ready, a9InterstitialLoaded")
         }
-            
-            
             
         else {
         print("[DEBUG] - preloading_interstitial")
