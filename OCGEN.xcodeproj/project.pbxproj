@@ -218,6 +218,9 @@
 		92DAD49D20B37C1A00E2678B /* VCSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DAD49C20B37C1A00E2678B /* VCSingleton.swift */; };
 		92DEB3C020F7C32D001BBC50 /* AerServSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DEB3BF20F7C32D001BBC50 /* AerServSDK.framework */; };
 		92DEB3C420F7C89F001BBC50 /* DTBiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DEB3C320F7C89F001BBC50 /* DTBiOSSDK.framework */; };
+		92E854862139BC08002926C4 /* InMobiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E854852139BC07002926C4 /* InMobiSDK.framework */; };
+		92E854882139BC6D002926C4 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E854872139BC6D002926C4 /* libsqlite3.0.tbd */; };
+		92E8548A2139BC75002926C4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E854892139BC75002926C4 /* libz.tbd */; };
 		9A0768A120AE45FC003DBCE4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */; };
 		9A393E6920AE347700685EC1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6820AE347700685EC1 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		9A393E6B20AE348500685EC1 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6A20AE348500685EC1 /* libxml2.2.tbd */; };
@@ -647,6 +650,9 @@
 		92DAD49C20B37C1A00E2678B /* VCSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCSingleton.swift; sourceTree = "<group>"; };
 		92DEB3BF20F7C32D001BBC50 /* AerServSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AerServSDK.framework; sourceTree = "<group>"; };
 		92DEB3C320F7C89F001BBC50 /* DTBiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DTBiOSSDK.framework; sourceTree = "<group>"; };
+		92E854852139BC07002926C4 /* InMobiSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = InMobiSDK.framework; sourceTree = "<group>"; };
+		92E854872139BC6D002926C4 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		92E854892139BC75002926C4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9A393E6820AE347700685EC1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9A393E6A20AE348500685EC1 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
@@ -666,6 +672,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92E8548A2139BC75002926C4 /* libz.tbd in Frameworks */,
+				92E854882139BC6D002926C4 /* libsqlite3.0.tbd in Frameworks */,
+				92E854862139BC08002926C4 /* InMobiSDK.framework in Frameworks */,
 				92C6BD18211BB3C0007E9992 /* CoreGraphics.framework in Frameworks */,
 				92C6BD19211BB3C0007E9992 /* UIKit.framework in Frameworks */,
 				92C6BECB211BB46E007E9992 /* libAvid-mopub-3.6.1.a in Frameworks */,
@@ -1275,6 +1284,9 @@
 		9A393E6520AE346D00685EC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				92E854892139BC75002926C4 /* libz.tbd */,
+				92E854872139BC6D002926C4 /* libsqlite3.0.tbd */,
+				92E854852139BC07002926C4 /* InMobiSDK.framework */,
 				92C6BD0E211BB3C0007E9992 /* CoreGraphics.framework */,
 				92C6BD11211BB3C0007E9992 /* CoreLocation.framework */,
 				92C6BD12211BB3C0007E9992 /* CoreMedia.framework */,

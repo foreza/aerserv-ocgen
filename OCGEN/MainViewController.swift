@@ -21,7 +21,7 @@ class MainViewController: UIViewController, ASAdViewDelegate, DTBAdCallback {
     // State Control and other vars
     var isReady = false                     // Variable that is toggled T/F based off of whether we preloaded a banner or not.
     var supportA9 = false                    // Variable that controls whether this app makes the S2S connection to A9
-    var bannerPlacementID = "1040600"
+    var bannerPlacementID = "380753"
     var autoRefresh = true
     
     // Banner and interstitial objects
