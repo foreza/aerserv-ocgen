@@ -10,7 +10,7 @@
 		923E78F220B73E1900410E37 /* StatGenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E78F120B73E1900410E37 /* StatGenController.swift */; };
 		923E78F620B7432B00410E37 /* GDPRPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E78F520B7432B00410E37 /* GDPRPopover.swift */; };
 		92AEBDAA20B7652C00854CDB /* GDPRSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEBDA920B7652C00854CDB /* GDPRSingleton.swift */; };
-		92C6BD0D211BB386007E9992 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C6BD0C211BB386007E9992 /* AdSupport.framework */; };
+		92C6BD0D211BB386007E9992 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C6BD0C211BB386007E9992 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		92C6BD18211BB3C0007E9992 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C6BD0E211BB3C0007E9992 /* CoreGraphics.framework */; };
 		92C6BD19211BB3C0007E9992 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C6BD0F211BB3C0007E9992 /* UIKit.framework */; };
 		92C6BD1A211BB3C0007E9992 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C6BD10211BB3C0007E9992 /* StoreKit.framework */; };
@@ -221,6 +221,18 @@
 		92E854862139BC08002926C4 /* InMobiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E854852139BC07002926C4 /* InMobiSDK.framework */; };
 		92E854882139BC6D002926C4 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E854872139BC6D002926C4 /* libsqlite3.0.tbd */; };
 		92E8548A2139BC75002926C4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E854892139BC75002926C4 /* libz.tbd */; };
+		92E854952139BDE4002926C4 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E8548B2139BDE3002926C4 /* EventKit.framework */; };
+		92E854962139BDE4002926C4 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E8548C2139BDE3002926C4 /* EventKitUI.framework */; };
+		92E854972139BDE4002926C4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E8548D2139BDE3002926C4 /* OpenGLES.framework */; };
+		92E854982139BDE4002926C4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E8548E2139BDE3002926C4 /* AudioToolbox.framework */; };
+		92E854992139BDE4002926C4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E8548F2139BDE4002926C4 /* AVFoundation.framework */; };
+		92E8549A2139BDE4002926C4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E854902139BDE4002926C4 /* CoreVideo.framework */; };
+		92E8549B2139BDE4002926C4 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E854912139BDE4002926C4 /* JavaScriptCore.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		92E8549C2139BDE4002926C4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E854922139BDE4002926C4 /* MessageUI.framework */; };
+		92E8549D2139BDE4002926C4 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E854932139BDE4002926C4 /* SafariServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		92E8549E2139BDE4002926C4 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E854942139BDE4002926C4 /* GLKit.framework */; };
+		92E854A02139BE10002926C4 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E8549F2139BE10002926C4 /* GoogleMobileAds.framework */; };
+		92E854A22139C000002926C4 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E854A12139C000002926C4 /* CoreMotion.framework */; };
 		9A0768A120AE45FC003DBCE4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */; };
 		9A393E6920AE347700685EC1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6820AE347700685EC1 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		9A393E6B20AE348500685EC1 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A393E6A20AE348500685EC1 /* libxml2.2.tbd */; };
@@ -653,6 +665,18 @@
 		92E854852139BC07002926C4 /* InMobiSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = InMobiSDK.framework; sourceTree = "<group>"; };
 		92E854872139BC6D002926C4 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		92E854892139BC75002926C4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		92E8548B2139BDE3002926C4 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		92E8548C2139BDE3002926C4 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		92E8548D2139BDE3002926C4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		92E8548E2139BDE3002926C4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		92E8548F2139BDE4002926C4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		92E854902139BDE4002926C4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		92E854912139BDE4002926C4 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		92E854922139BDE4002926C4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		92E854932139BDE4002926C4 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		92E854942139BDE4002926C4 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		92E8549F2139BE10002926C4 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		92E854A12139C000002926C4 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		9A0768A020AE45FC003DBCE4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9A393E6820AE347700685EC1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9A393E6A20AE348500685EC1 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
@@ -672,23 +696,35 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92E8549A2139BDE4002926C4 /* CoreVideo.framework in Frameworks */,
+				92E854A22139C000002926C4 /* CoreMotion.framework in Frameworks */,
+				92E8549E2139BDE4002926C4 /* GLKit.framework in Frameworks */,
+				92E854972139BDE4002926C4 /* OpenGLES.framework in Frameworks */,
+				92E8549B2139BDE4002926C4 /* JavaScriptCore.framework in Frameworks */,
+				92E854A02139BE10002926C4 /* GoogleMobileAds.framework in Frameworks */,
+				92E854952139BDE4002926C4 /* EventKit.framework in Frameworks */,
+				92E854962139BDE4002926C4 /* EventKitUI.framework in Frameworks */,
+				92E854982139BDE4002926C4 /* AudioToolbox.framework in Frameworks */,
+				92E854992139BDE4002926C4 /* AVFoundation.framework in Frameworks */,
+				92E8549C2139BDE4002926C4 /* MessageUI.framework in Frameworks */,
+				92E8549D2139BDE4002926C4 /* SafariServices.framework in Frameworks */,
+				92C6BD0D211BB386007E9992 /* AdSupport.framework in Frameworks */,
+				92C6BD18211BB3C0007E9992 /* CoreGraphics.framework in Frameworks */,
+				92C6BD1C211BB3C0007E9992 /* CoreMedia.framework in Frameworks */,
+				92C6BD1D211BB3C0007E9992 /* CoreTelephony.framework in Frameworks */,
+				92C6BD1F211BB3C0007E9992 /* MediaPlayer.framework in Frameworks */,
+				92C6BD1A211BB3C0007E9992 /* StoreKit.framework in Frameworks */,
+				92C6BD21211BB3C0007E9992 /* SystemConfiguration.framework in Frameworks */,
 				92E8548A2139BC75002926C4 /* libz.tbd in Frameworks */,
 				92E854882139BC6D002926C4 /* libsqlite3.0.tbd in Frameworks */,
 				92E854862139BC08002926C4 /* InMobiSDK.framework in Frameworks */,
-				92C6BD18211BB3C0007E9992 /* CoreGraphics.framework in Frameworks */,
 				92C6BD19211BB3C0007E9992 /* UIKit.framework in Frameworks */,
 				92C6BECB211BB46E007E9992 /* libAvid-mopub-3.6.1.a in Frameworks */,
-				92C6BD1A211BB3C0007E9992 /* StoreKit.framework in Frameworks */,
 				92C6BD1B211BB3C0007E9992 /* CoreLocation.framework in Frameworks */,
-				92C6BD1C211BB3C0007E9992 /* CoreMedia.framework in Frameworks */,
-				92C6BD1D211BB3C0007E9992 /* CoreTelephony.framework in Frameworks */,
 				92C6BECC211BB46E007E9992 /* MPUBMoatMobileAppKit.framework in Frameworks */,
 				92C6BD1E211BB3C0007E9992 /* Foundation.framework in Frameworks */,
-				92C6BD1F211BB3C0007E9992 /* MediaPlayer.framework in Frameworks */,
 				92C6BD20211BB3C0007E9992 /* QuartzCore.framework in Frameworks */,
-				92C6BD21211BB3C0007E9992 /* SystemConfiguration.framework in Frameworks */,
 				9A393E6920AE347700685EC1 /* WebKit.framework in Frameworks */,
-				92C6BD0D211BB386007E9992 /* AdSupport.framework in Frameworks */,
 				92DEB3C420F7C89F001BBC50 /* DTBiOSSDK.framework in Frameworks */,
 				9A393E6B20AE348500685EC1 /* libxml2.2.tbd in Frameworks */,
 				92DEB3C020F7C32D001BBC50 /* AerServSDK.framework in Frameworks */,
@@ -1284,6 +1320,18 @@
 		9A393E6520AE346D00685EC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				92E854A12139C000002926C4 /* CoreMotion.framework */,
+				92E8549F2139BE10002926C4 /* GoogleMobileAds.framework */,
+				92E8548E2139BDE3002926C4 /* AudioToolbox.framework */,
+				92E8548F2139BDE4002926C4 /* AVFoundation.framework */,
+				92E854902139BDE4002926C4 /* CoreVideo.framework */,
+				92E8548B2139BDE3002926C4 /* EventKit.framework */,
+				92E8548C2139BDE3002926C4 /* EventKitUI.framework */,
+				92E854942139BDE4002926C4 /* GLKit.framework */,
+				92E854912139BDE4002926C4 /* JavaScriptCore.framework */,
+				92E854922139BDE4002926C4 /* MessageUI.framework */,
+				92E8548D2139BDE3002926C4 /* OpenGLES.framework */,
+				92E854932139BDE4002926C4 /* SafariServices.framework */,
 				92E854892139BC75002926C4 /* libz.tbd */,
 				92E854872139BC6D002926C4 /* libsqlite3.0.tbd */,
 				92E854852139BC07002926C4 /* InMobiSDK.framework */,
@@ -1767,7 +1815,7 @@
 					"$(PROJECT_DIR)/OCGEN/MoPubSDK/Viewability/MOAT",
 				);
 				INFOPLIST_FILE = OCGEN/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1777,7 +1825,10 @@
 					"$(PROJECT_DIR)/OCGEN",
 					"$(PROJECT_DIR)/OCGEN/MoPubSDK/Viewability/Avid",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vartyr.ocgen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1800,7 +1851,7 @@
 					"$(PROJECT_DIR)/OCGEN/MoPubSDK/Viewability/MOAT",
 				);
 				INFOPLIST_FILE = OCGEN/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1810,7 +1861,10 @@
 					"$(PROJECT_DIR)/OCGEN",
 					"$(PROJECT_DIR)/OCGEN/MoPubSDK/Viewability/Avid",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vartyr.ocgen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
